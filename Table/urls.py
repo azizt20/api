@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from booking.views import index
-from booking import views
 from booking.models import *
 from booking.serializers import *
 
@@ -27,13 +26,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('api/', include('booking.urls'))
-    # path('order/', views.OrderList.as_view()),
-    # path('room/', views.RoomList.as_view()),
-    # path('roomtype/', views.RoomTypeList.as_view()),
-    # path('order1/', views.Order1List.as_view()),
-    # path('room1/', views.Room1List.as_view()),
-    # path('roomtype1/', views.RoomType1List.as_view()),
-    # path('date/', views.RoomType1List.as_view())
-
-
 ]

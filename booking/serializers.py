@@ -1,9 +1,17 @@
 from rest_framework import serializers
 from booking.models import RoomType, Room, Order
+import datetime
 
+
+
+date_now = (datetime.datetime.now() - datetime.timedelta(days=10))
+qwerty = []
+for i in range(30):
+    qwerty.append((date_now + datetime.timedelta(days=i)).date())
 
 class DateModelSerializer(serializers.ModelSerializer):
     date = serializers.DateField()
+
 
 
 class RoomTypeModelSerializer(serializers.ModelSerializer):

@@ -16,7 +16,7 @@ class RoomType(models.Model):
 
 
 class Room(models.Model):
-    room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
+    room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE, related_name='rooms')
     room_number = models.IntegerField()
     slug = models.SlugField()
     description = models.CharField(max_length=200)
@@ -32,7 +32,7 @@ class Room(models.Model):
 
 
 class Order(models.Model):
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='orders')
     slug = models.SlugField()
     start_date = models.DateField()
     finish_date = models.DateField()
@@ -43,6 +43,9 @@ class Order(models.Model):
 
     def get_absolute_url(self):
         return f'/{self.room.room_type.slug}/{self.room.slug}/{self.slug}'
+
+    def __str__(self):
+        return f'{self.id} '
 
 
 

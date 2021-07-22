@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from .serializers import DateModelSerializer, RoomTypeModelSerializer, RoomModelSerializer, OrderModelSerializer, \
     Order1ModelSerializer, Room1ModelSerializer, RoomType1ModelSerializer
 import datetime
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
 
 # Create your views here.
 
@@ -15,6 +17,7 @@ for i in range(30):
 
 
 def index(request):
+
     room = Room.objects.all()
     return render(request, 'index.html', {'r': room, 'd': qwerty})
 
