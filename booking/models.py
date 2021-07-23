@@ -54,13 +54,21 @@ class Order(models.Model):
     def get_absolute_url(self):
         return f'/{self.room.room_type.slug}/{self.room.slug}/{self.slug}'
 
-    @property
-    def diff_days(self):
-        return (self.finish_date - self.start_date).days
 
     def __str__(self):
         return f'{self.id} '
 
+
+class Order_waiting(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='orders')
+    slug = models.SlugField()
+    start_date = models.DateField()
+    finish_date = models.DateField()
+    count_day = models.IntegerField()
+    order_cost = models.IntegerField()
+    user_name = models.CharField(max_length=50)
+    phone_number = models.IntegerField()
+    email = models.CharField(max_length=200)
 
 class Menu(models.Model):
     type = models.CharField(max_length=225, blank=True)
