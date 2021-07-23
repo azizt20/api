@@ -8,6 +8,6 @@ class BookingForm(forms.ModelForm):
         # order_cost = Order.count_day * Order.room.cost_per_day
         exclude = ['order_cost']
         widgets = {
-            'start_date': forms.DateInput,
+            'start_date': forms.TextInput(attrs={'type': 'date'}),
             'finish_date': forms.DateInput,
         }

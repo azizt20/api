@@ -1,0 +1,120 @@
+{% load static tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <title>Dashboard</title>
+    <style>
+        .thhover:hover {
+            background-color: #0c5460;
+        }
+
+        body {
+            background-color: #4e555b;
+            color: white;
+        }
+
+        .ordered {
+            background-color: darkred;
+        }
+
+        .ordered:hover {
+            background-color: firebrick;
+        }
+    </style>
+</head>
+<body class="overflow-hidden w-100">
+
+<div class="row">
+    <div class="offset-1 col-lg-11  w-100 p-0 overflow-auto" >
+        <div class="container">{{ current_Date }}</div>
+        <table class="table table-bordered table-dark " >
+            <thead >
+            <tr>
+                <th scope="col">#</th>
+                {#    {% if month %}adasdasdasd{% endif %}#}
+                {% for days in month %}
+                    {% if days.date == current_Date %}
+                        <th scope="col" style="background-color: lightslategray">{{ days.day }}</th>
+                    {% else %}
+                        <th scope="col" class="">{{ days.day }}</th>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody class="">
+
+            {% for typr in types %}
+                {% for room in rooms %}
+                    {% if room.room_type == typr %}
+                        <tr>
+                            <th scope="row">{{ room.slug }}</th>
+                            {% for days in month %}
+                                {% build_key room days as key %}
+                                {% if key not in skip %}
+                                    {% if key in data %}
+                                        {% get_item data key as found %}
+                                        <th scope="col" colspan="{{ found.diff_days }}"
+                                            class="ordered">{{ found.user_name }}</th>
+                                    {% else %}
+                                        <th data-date="{{ days }}"
+                                            data-room="{{ room }}"
+                                            data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            scope="col" colspan="" class="thhover aziz"></th>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade text-secondary" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form action="{% url 'booking' %}" method="POST">
+      <div class="modal-body">
+
+                        {% csrf_token %}
+                       {{form.as_ul}}
+                        <button type="submit" class="btn btn-secondary mt-2">Save changes</button>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+                 </form>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/jquary.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script>
+    {#$('.aziz').click(function (){#}
+    {#    let a = $(this).data("date")#}
+    {#    let b = $(this).data("room")#}
+    {#    console.log($(this).data("date"))#}
+    {#    $(".modal-body").html(a+b)#}
+    {#})#}
+
+</script>
+</body>
+</html>

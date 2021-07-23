@@ -44,10 +44,12 @@ class Order(models.Model):
     def get_absolute_url(self):
         return f'/{self.room.room_type.slug}/{self.room.slug}/{self.slug}'
 
+    @property
+    def diff_days(self):
+        return (self.finish_date - self.start_date).days
+
     def __str__(self):
         return f'{self.id} '
-
-
 
 
 class Menu(models.Model):
@@ -55,6 +57,7 @@ class Menu(models.Model):
 
     def __str__(self):
         return f'{self.type}'
+
 
 class Items(models.Model):
     type_menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name='type_menu')

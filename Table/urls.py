@@ -29,5 +29,6 @@ urlpatterns = [
     path('room/', room, name="room"),
     path('kitchen/', kitchen, name="kitchen"),
     path('relax/', relax, name="relax"),
-    path('api/', include('booking.urls'))
+    path('api/', include('booking.urls')),
+    path('dashboard/', include('dashboard.urls'))
 ]

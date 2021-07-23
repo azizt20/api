@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'booking',
-    'rest_framework'
+    'dashboard',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -66,6 +68,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'tags': 'dashboard.templatetags.tags',
+
+            }
         },
     },
 ]
