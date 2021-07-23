@@ -678,6 +678,10 @@ h3 {
     margin-top: 92px;
     color: white !important; }
 
+@media (max-width: 1199.98px) {
+  .wrapper-room .section2 .form {
+    margin-left: auto !important;
+    margin-right: auto !important; } }
 @media (max-width: 991.98px) {
   .wrapper-room .section1 img {
     margin-top: 30px; }

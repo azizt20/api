@@ -22,7 +22,7 @@
         <header class="header position-absolute w-100 ">
             <div class="container">
                 <nav class="navbar navbar-expand-lg px-3 px-md-0">
-                    <a class="navbar-brand" href="home.html"><img src="{% static 'img/logo2.svg' %}" class="img-fluid" alt=""
+                    <a class="navbar-brand" href="{%  url 'home' %}"><img src="{% static 'img/logo2.svg' %}" class="img-fluid" alt=""
                             srcset=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,9 +30,9 @@
                     </button>
                     <div class=" collapse navbar-collapse justify-content-lg-end justify-content-start" id="navbarNav">
                         <div class=" navbar-nav align-items-lg-center ">
-                            <a class="nav-link active" href="#">Номера <span class="sr-only">(current)</span></a>
-                            <a class="nav-link active" href="#">Ресторан</a>
-                            <a class="nav-link active" href="#">Отдых</a>
+                            <a class="nav-link active" href="{%  url 'room' %}">Номера <span class="sr-only">(current)</span></a>
+                            <a class="nav-link active" href="{%  url 'kitchen' %}">Ресторан</a>
+                            <a class="nav-link active" href="{%  url 'relax' %}">Отдых</a>
                             <a class="nav-link active d-flex" href="#"><img src="{% static 'img/home/en.png' %}" class="mr-2 img-fluid"
                                     alt=""> EN</a>
                         </div>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-md-8 row info">
                         <div class="col-lg-7">
-                            <h2>Люкс двухместный</h2>
+                            <h2 id="opaae">Люкс двухместный</h2>
                             <span>
                                 1 двуспальная кровать · 1 ванная · 1 санузел
                             </span>
@@ -63,27 +63,27 @@
                             <div class="dropdown w-100">
                                 <button class="btn blya w-100 " type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    2 000 000 сумм/сутки
+
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <div class="dropdown-item sect d-flex align-items-center"
-                                        data-cost="2 000 000 сумм/сутки" href=""><span>Эконом</span>
+                                        data-cost="2000000 " data-title="Эконом двухместный" id="1" href=""><span>Эконом</span>
                                         <div class="ml-auto">от 2 млн</div>
                                     </div>
                                     <div class="dropdown-item sect d-flex align-items-center"
-                                        data-cost="3 000 000 сумм/сутки" href=""><span>Стандарт</span>
+                                        data-cost="3000000 " data-title="Стандарт двухместный" href=""><span>Стандарт</span>
                                         <div class="ml-auto">от 3 млн</div>
                                     </div>
                                     <div class="dropdown-item sect d-flex align-items-center"
-                                        data-cost="4 000 000 сумм/сутки" href=""><span>Полулюкс</span>
+                                        data-cost="4000000 " data-title="Полулюкс двухместный" href=""><span>Полулюкс</span>
                                         <div class="ml-auto">от 4 млн</div>
                                     </div>
                                     <div class="dropdown-item sect d-flex align-items-center"
-                                        data-cost="4 500 000 сумм/сутки" href=""><span>Люкс</span>
+                                        data-cost="4500000 " data-title="Люкс двухместный" href=""><span>Люкс</span>
                                         <div class="ml-auto">от 4,5 млн</div>
                                     </div>
                                     <div class="dropdown-item sect d-flex align-items-center"
-                                        data-cost="5 000 000 сумм/сутки" href=""><span>Семейный</span>
+                                        data-cost="5000000 " data-title="Семейный двухместный" href=""><span>Семейный</span>
                                         <div class="ml-auto">от 5 млн</div>
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
                         </div>
                     </div>
                     <div class="col-lg-5 ">
-                        <div class="col form ml-lg-auto mx-auto " style="width: 380px;">
+                        <div class="col form ml-lg-auto  " style="width: 380px;">
                             <div class="form-group">
                                 <div style="font-size: 25px;" class="mb-4 text-center"><b>Найти номер</b></div>
                                 <span>Вид номера</span>
@@ -165,23 +165,23 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <div class="dropdown-item sect d-flex align-items-center"
-                                            data-cost="2 000 000 сумм/сутки" href=""><span>Эконом</span>
+                                            data-cost="2 000 000 " id="1" href=""><span>Эконом</span>
                                             <div class="ml-auto">от 2 млн</div>
                                         </div>
                                         <div class="dropdown-item sect d-flex align-items-center"
-                                            data-cost="3 000 000 сумм/сутки" href=""><span>Стандарт</span>
+                                            data-cost="3 000 000 " href=""><span>Стандарт</span>
                                             <div class="ml-auto">от 3 млн</div>
                                         </div>
                                         <div class="dropdown-item sect d-flex align-items-center"
-                                            data-cost="4 000 000 сумм/сутки" href=""><span>Полулюкс</span>
+                                            data-cost="4 000 000 " href=""><span>Полулюкс</span>
                                             <div class="ml-auto">от 4 млн</div>
                                         </div>
                                         <div class="dropdown-item sect d-flex align-items-center"
-                                            data-cost="4 500 000 сумм/сутки" href=""><span>Люкс</span>
+                                            data-cost="4 500 000 " href=""><span>Люкс</span>
                                             <div class="ml-auto">от 4,5 млн</div>
                                         </div>
                                         <div class="dropdown-item sect d-flex align-items-center"
-                                            data-cost="5 000 000 сумм/сутки" href=""><span>Семейный</span>
+                                            data-cost="5 000 000 " href=""><span>Семейный</span>
                                             <div class="ml-auto">от 5 млн</div>
                                         </div>
                                     </div>
@@ -286,7 +286,7 @@
                                     <label class="form-check-label ml-2" for="inlineCheckbox1">Домашнее животное</label>
                                 </span>
                                 <div class="form-control border-0 mt-0 p-0  h-auto total_cost"
-                                    style="font-size: 20px; text-align: center;"><b>2 500 000 млн сумов</b></div>
+                                    style="font-size: 20px; text-align: center;"><b class="total_cost_e">2 500 000 млн сумов</b></div>
                                 <button class="btn w-100 booking">Забронировать</button>
                             </div>
 
@@ -510,16 +510,7 @@
     <script src="{% static 'js/daterangepicker.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="https://kit.fontawesome.com/cb3bbb09f5.js" crossorigin="anonymous"></script>
-    <script>
-        $('#picker').daterangepicker({
-            opens: 'center',
-        }
-            , function (start, end) {
-                console.log(start._d)
-                console.log(end._d)
-            }
-        );
-    </script>
+
 </body>
 
 </html>
