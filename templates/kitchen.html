@@ -22,7 +22,7 @@
 
         <div class="container">
             <nav class="navbar navbar-expand-lg px-3 px-md-0">
-                <a class="navbar-brand" href="home.html"><img src="{% static 'img/logo.svg' %}" class="img-fluid" alt=""
+                <a class="navbar-brand" href="{%  url 'home' %}"><img src="{% static 'img/logo.svg' %}" class="img-fluid" alt=""
                                                               srcset=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,9 +30,9 @@
                 </button>
                 <div class=" collapse navbar-collapse justify-content-lg-end justify-content-start" id="navbarNav">
                     <div class=" navbar-nav align-items-lg-center ">
-                        <a class="nav-link active" href="#">Номера <span class="sr-only">(current)</span></a>
-                        <a class="nav-link active" href="#">Ресторан</a>
-                        <a class="nav-link active" href="#">Отдых</a>
+                        <a class="nav-link active" href="{%  url 'room' %}">Номера <span class="sr-only">(current)</span></a>
+                        <a class="nav-link active" href="{%  url 'kitchen' %}">Ресторан</a>
+                        <a class="nav-link active" href="{%  url 'relax' %}">Отдых</a>
                         <a class="nav-link active d-flex" href="#"><img src="{% static 'img/home/en.png' %}"
                                                                         class="mr-2 img-fluid"
                                                                         alt=""> EN</a>
@@ -146,10 +146,11 @@
                 <ul class="nav nav-tabs row pl-3" id="myTab" role="tablist">
 
 
-                    {% for m in m %}
+                    {% for mm in m %}
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="home-tab{{ m.id }}" data-toggle="tab" href="#home{{ m.id }}" role="tab"
-                               aria-controls="home" aria-selected="true">{{ m }}</a>
+                            <a class="nav-link " id="home-tab{{ mm.id }}" data-toggle="tab" href="#home{{ mm.id }}"
+                               role="tab"
+                               aria-controls="home" aria-selected="true">{{ mm }}</a>
                         </li>
                         <div class="br">
                             <div class="li">&#8226</div>
@@ -165,659 +166,56 @@
 
                 <div class="tab-content" id="myTabContent">
 
+                    {% for menu in m %}
+                        <div class="tab-pane fade show  " id="home{{ menu.id }}" role="tabpanel"
+                             aria-labelledby="home-tab{{ menu.id }}">
+                            <div class="row ">
+                                <div class="col-lg-5 ">
+
+                                    {% load my_filter %}
+
+                                    {% for m in menu.items_set.all %}
+                                        {% if forloop.counter <= menu.items_set.all|leng %}
+                                            <div class="item">
+                                                <div class="dish">
+                                                    {{ m.dish }}
+                                                </div>
+                                                <div class="span"></div>
+                                                <div class="cost">
+                                                    <div>
+                                                        {{ m.cost }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                </div>
+                                <div class="col-lg-5 offset-lg-1">
+                                    {% for m in menu.items_set.all %}
+                                        {% if forloop.counter > menu.items_set.all|leng %}
+                                            <div class="item">
+                                            <div class="dish">
+                                                {{ m.dish }}
+                                            </div>
+                                            <div class="span"></div>
+                                            <div class="cost">
+                                                <div>
+                                                    {{ m.cost }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
 
 
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row ">
-                            <div class="col-lg-5 ">
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с грибами
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет классический
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с овощами и сосисками
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша манная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша рисовая
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша овсяная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Оладьи с медом
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Кукурузные хлопья
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Сосиски жареные
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            12 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Сосиски вареные
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 offset-lg-1">
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с грибами
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет классический
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с овощами и сосисками
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша манная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша рисовая
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша овсяная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Оладьи с медом
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Кукурузные хлопья
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Сосиски жареные
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            12 000
-                                        </div>
-                                    </div>
+                                    {% endfor %}
+
+
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="row ">
-                            <div class="col-lg-5 ">
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с грибами
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет классический
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с овощами и сосисками
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша манная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша рисовая
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша овсяная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Оладьи с медом
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Кукурузные хлопья
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Сосиски жареные
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            12 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Сосиски вареные
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 offset-lg-1">
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с грибами
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет классический
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с овощами и сосисками
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша манная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша рисовая
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша овсяная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Оладьи с медом
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Кукурузные хлопья
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Сосиски жареные
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            12 000
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <div class="row ">
-                            <div class="col-lg-5 ">
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с грибами
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет классический
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с овощами и сосисками
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша манная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша рисовая
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша овсяная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Оладьи с медом
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Кукурузные хлопья
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Сосиски жареные
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            12 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Сосиски вареные
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 offset-lg-1">
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с грибами
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет классический
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Омлет с овощами и сосисками
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша манная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша рисовая
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Каша овсяная
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Оладьи с медом
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            20 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Кукурузные хлопья
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            15 000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="dish">
-                                        Сосиски жареные
-                                    </div>
-                                    <div class="span"></div>
-                                    <div class="cost">
-                                        <div>
-                                            12 000
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+
 
                 </div>
 

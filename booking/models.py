@@ -6,6 +6,7 @@ from django.db import models
 # Create your models here.
 class RoomType(models.Model):
     type = models.CharField(max_length=50, blank=True)
+    min_cost = models.IntegerField()
     slug = models.SlugField()
 
     def get_absolute_url(self):
@@ -13,6 +14,14 @@ class RoomType(models.Model):
 
     def __str__(self):
         return f'{self.type}'
+
+class Room_info(models.Model):
+    room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
+
+
+class Room_photo(models.Model):
+    room_type = models.ForeignKey(Room_info, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
 
 class Room(models.Model):
@@ -39,7 +48,8 @@ class Order(models.Model):
     count_day = models.IntegerField()
     order_cost = models.IntegerField()
     user_name = models.CharField(max_length=50)
-    color = models.CharField(max_length=50)
+    phone_number = models.IntegerField()
+    email = models.CharField(max_length=200)
 
     def get_absolute_url(self):
         return f'/{self.room.room_type.slug}/{self.room.slug}/{self.slug}'
@@ -48,16 +58,15 @@ class Order(models.Model):
         return f'{self.id} '
 
 
-
-
 class Menu(models.Model):
     type = models.CharField(max_length=225, blank=True)
 
     def __str__(self):
         return f'{self.type}'
 
+
 class Items(models.Model):
-    type_menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name='type_menu')
+    type_menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     dish = models.CharField(max_length=225)
     cost = models.IntegerField()
 
