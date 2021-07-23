@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import RoomType, Room, Order
+from .models import RoomType, Room, Order, Menu
 from rest_framework import generics
 from rest_framework.response import Response
 from .serializers import DateModelSerializer, RoomTypeModelSerializer, RoomModelSerializer, OrderModelSerializer, \
@@ -16,10 +16,24 @@ for i in range(30):
     qwerty.append((date_now + datetime.timedelta(days=i)).date())
 
 
-def index(request):
+def home(request):
+    # room = Room.objects.all()
+    return render(request, 'home.html')
+    # return render(request, 'index.html', {'r': room, 'd': qwerty})
 
-    room = Room.objects.all()
-    return render(request, 'index.html', {'r': room, 'd': qwerty})
+def room(request):
+    return render(request, 'room.html')
+
+def booking(request):
+    return render(request, 'booking.html')
+
+def relax(request):
+    return render(request, 'relax.html')
+
+def kitchen(request):
+    menu = Menu.objects.all()
+    return render(request, 'kitchen.html', {'m': menu})
+
 
 class RoomTypeList(generics.ListCreateAPIView):
     queryset = RoomType.objects.all()

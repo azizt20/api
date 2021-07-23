@@ -50,9 +50,16 @@ class Order(models.Model):
 
 
 
-class Item(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    busy = models.BooleanField(default=False)
+class Menu(models.Model):
+    type = models.CharField(max_length=225, blank=True)
 
     def __str__(self):
-        return f'{self.busy}'
+        return f'{self.type}'
+
+class Items(models.Model):
+    type_menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name='type_menu')
+    dish = models.CharField(max_length=225)
+    cost = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.dish}'

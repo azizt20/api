@@ -1,0 +1,457 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="icon" sizes="" type="image/png" href="{% static 'img/logo.svg' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+</head>
+
+<body>
+
+    <section class="wrapper-home">
+
+        <header class="header position-absolute w-100 ">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg px-3 px-md-0">
+                    <a class="navbar-brand" href="home.html"><img src="{% static 'img/logo.svg' %}" class="img-fluid" alt=""
+                            srcset=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class=" collapse navbar-collapse justify-content-lg-end justify-content-start" id="navbarNav">
+                        <div class=" navbar-nav align-items-lg-center ">
+                            <a class="nav-link active" href="#">Номера <span class="sr-only">(current)</span></a>
+                            <a class="nav-link active" href="#">Ресторан</a>
+                            <a class="nav-link active" href="#">Отдых</a>
+                            <a class="nav-link active d-flex" href="#"><img src="{% static 'img/home/en.png' %}" class="mr-2 img-fluid"
+                                    alt=""> EN</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+        </header>
+
+
+        <section class="section1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 d-flex align-items-center" id="booking">
+                        <h1>Бронируйте незабываемый отдых в горах Акташа </h1>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="col form ml-md-auto " style="width: 380px;">
+                            <div class="form-group">
+                                <div style="font-size: 25px;" class="mb-4 text-center"><b>Найти номер</b></div>
+                                <span>Вид номера</span>
+                                <div class="dropdown  p-0 d-flex align-items-center w-100">
+                                    <button class="btn w-100 justify-content-center form-control" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        Эконом
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <div  class="dropdown-item d-flex align-items-center" href=""><span>Эконом</span>
+                                            <div class="ml-auto">от 2 млн</div>
+                                        </div>
+                                        <div class="dropdown-item d-flex align-items-center" href=""><span>Стандарт</span>
+                                            <div class="ml-auto">от 3 млн</div>
+                                        </div>
+                                        <div class="dropdown-item d-flex align-items-center" href=""><span>Полулюкс</span>
+                                            <div class="ml-auto">от 4 млн</div>
+                                        </div>
+                                        <div class="dropdown-item d-flex align-items-center" href=""><span>Люкс</span>
+                                            <div class="ml-auto">от 4,5 млн</div>
+                                        </div>
+                                        <div class="dropdown-item d-flex align-items-center" href=""><span>Семейный</span>
+                                            <div class="ml-auto">от 5 млн</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span>Прибытие</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <span>Выезд</span>
+                                    </div>
+                                </div>
+                                <input type="text" id="picker" class="form-control text-center">
+                                <span>Гостей</span>
+                                <a class="btn border form-control text-left d-flex justify-content-between collapse1 mt-2  position-relative"
+                                    data-toggle="collapse" href="#multiCollapseExample1" role="button"
+                                    aria-expanded="false" aria-controls="multiCollapseExample1">
+                                    2 взрослых <span style="font-size: 20px;">&#8249;</span>
+
+                                </a>
+                                <div class="collapse collapse12 multi-collapse position-absolute  w-75"
+                                    id="multiCollapseExample1">
+                                    <div class="card card-body w-100">
+                                        <div class="col p-0 m-0 w-100">
+                                            <div
+                                                class="persons d-flex justify-content-between align-items-center w-100 ">
+                                                <div>
+                                                    <div>
+                                                        <b>
+                                                            Взрослый
+                                                        </b>
+                                                    </div>
+                                                    <div class="mini-info">
+                                                    </div>
+                                                </div>
+                                                <div class="number-input ml-auto">
+                                                    <button
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                        class="minus">-</button>
+                                                    <input class="quantity" min="0" name="quantity" value="1"
+                                                        type="number">
+                                                    <button
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                        class="plus">+</button>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                class="persons d-flex justify-content-between align-items-center w-100 ">
+                                                <div>
+                                                    <div>
+                                                        <b>
+                                                            Ребенок
+                                                        </b>
+                                                    </div>
+                                                    <div class="mini-info">
+                                                        до 8 лет
+                                                    </div>
+                                                </div>
+                                                <div class="number-input ml-auto">
+                                                    <button
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                        class="minus">-</button>
+                                                    <input class="quantity" min="0" name="quantity" value="0"
+                                                        type="number">
+                                                    <button
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                        class="plus">+</button>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                class="persons d-flex justify-content-between align-items-center w-100 ">
+                                                <div>
+                                                    <div>
+                                                        <b>
+                                                            Младенец
+                                                        </b>
+                                                    </div>
+                                                    <div class="mini-info">
+                                                        до 3 лет
+                                                    </div>
+                                                </div>
+                                                <div class="number-input ml-auto">
+                                                    <button
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                        class="minus">-</button>
+                                                    <input class="quantity" min="0" name="quantity" value="0"
+                                                        type="number">
+                                                    <button
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                        class="plus">+</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <span class="d-flex align-items-center form-control border-0 text-left chack py-0 h-auto">
+                                    <input class="" type="checkbox" id="inlineCheckbox1"
+                                        value="option1">
+                                    <label class="form-check-label ml-2" for="inlineCheckbox1">Домашнее животное</label>
+                                </span>
+                                <div class="form-control border-0 mt-0 p-0  h-auto total_cost"
+                                    style="font-size: 20px; text-align: center;"><b>2 500 000 млн сумов</b></div>
+                                <button class="btn w-100 booking">Забронировать</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section2">
+
+            <div class="container">
+                <div class="section2-content row">
+                    <div class="col-md-5 d-flex flex-column justify-content-end">
+                        <div class="bg-svet"> </div>
+                        <p>
+                        <h2>
+                            Летний и зимний
+                            <br> бассейн
+                        </h2>
+                        </p>
+                        <span>
+                            120 кв.м летнего бассейна <br>
+                            с видом на горы. И уютный зимний <br>
+                            бассейн с регулируемой температурой <br> для вашего комфорта
+                        </span>
+                    </div>
+                    <div class="col-md-7 d-flex align-items-center">
+                        <img src="{% static 'img/home/section2.jpg' %}" class="img-fluid  w-100" alt="" srcset="">
+                    </div>
+                </div>
+
+                <div id="appartament">
+                    <img src="{% static 'img/home/pool.jpg' %}" class="img-fluid pool" alt="" srcset="">
+                    <a href="">Что есть еще? →</a>
+                </div>
+
+                <img src="{% static 'img/home/appartament.jpg' %}" class="img-fluid appartament" alt="" srcset="">
+                <h2>
+                    Огромная территория для прогулок, <br>
+                    свежий горный воздух
+                </h2>
+
+                <div class="" id="kitchen">
+                    <div class="row kitchen">
+                        <div class="col-md-7 d-flex ">
+                            <img src="{% static 'img/home/salat.jpg' %}" class="img-fluid my-auto" alt="" srcset="">
+                        </div>
+                        <div class="col-md-5 d-flex flex-column justify-content-end">
+                            <div class="bg-svet"> </div>
+
+                            <h2>
+                                Национальная <br>
+                                и европейская кухня
+                            </h2>
+                            <img src="{% static 'img/home/ice-cream.jpg' %}" class="img-fluid" style="margin-top: 40px;" alt=""
+                                srcset="">
+                        </div>
+                    </div>
+                </div>
+                <a class="m-0" href="">Подробнее о кухне →</a>
+            </div>
+
+        </section>
+
+
+        <section class="section3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <p>
+                        <h2>
+                            Что о нас говорят гости
+                        </h2>
+                        </p>
+                        <div>
+                            Собрали честные отзывы наших гостей в соцсетях,
+                            в основном на Фэйсбуке.
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-md-3 row-cols-1">
+                    <div class="col  ">
+                        <div class="review">
+                            <div class="avatar" style="background-image: url({% static '/img/home/rew1.png' %}); ">
+                            </div>
+
+                            <div class="contant">
+                                <span>Бегзод</span>
+                                <div>
+                                    По рекомендации поехали праздновать день рождения сына в Heaven’s Garden. Аниматоры
+                                    впечатлили.
+                                    Дети счастливы – праздник удался.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        <div class="review">
+                            <div class="avatar" style="background-image: url({% static '/img/home/rew2.png' %}); ">
+                            </div>
+
+                            <div class="contant">
+                                <span>Нигора</span>
+                                <div>
+                                    Отдыхали в ХГ в июне с мужем. Понравилась кухня, особенно европейская. Советую
+                                    попробовать у
+                                    них куриные бедрышки и стейк Рибай)
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="review">
+                            <div class="avatar" style="background-image: url({% static '/img/home/rew3.png' %}); ">
+                            </div>
+
+                            <div class="contant">
+                                <span>Стас</span>
+                                <div>
+                                    В Хэвансе был два раза. Один раз с друзьями, второй раз один. Не вылезал из хаммама
+                                    и
+                                    соляной пещеры. В этом сезоне поеду еще раз точно.
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section4">
+            <div class="container">
+                <h2>Как до нас добраться?</h2>
+                <div class="contacts">
+                    <div class="row row-cols-md-2 row-cols-1">
+                        <div class="col info">
+                            <span>
+                                <img src="{% static 'img/home/location.svg' %}" class="img-fluid" alt="" srcset="">
+                                <div>Адрес</div>
+                            </span>
+                            <div class="text">
+                                Бостанлыкский район, заповедник Акташ
+                            </div>
+
+                            <span>
+                                <img src="{% static 'img/home/transport.svg' %}" class="img-fluid" alt="" srcset="">
+                                <div>Трансфер</div>
+                            </span>
+                            <div class="text">
+                                Наш минибас Hyundai заберет вас с Ташкента,
+                                и отвезет обратно. Автомобиль вмещает 10 человек. Стоимость поездки в одну сторону
+                                600.000
+                                сумов.
+                                <br>
+                                <br>
+                                На остальной транспорт цена договорная.
+                            </div>
+
+                            <span>
+                                <img src="{% static 'img/home/telephone.svg' %}" class="img-fluid" alt="" srcset="">
+                                <div>Бронь по телефону:</div>
+                            </span>
+                            <a href="tel: + 998 (70) 202-01-01">+ 998 (70) 202-01-01</a>
+                        </div>
+                        <div class="col">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2981.6574305678355!2d69.76208961569786!3d41.641535588163336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38af1f12f3fdd549%3A0xd2c20fbfbf97306d!2z0JPQvtGB0YLQuNC90LjRh9C90YvQuSDQutC-0LzQv9C70LXQutGBICJIZWF2ZW4ncyBHYXJkZW4i!5e0!3m2!1sru!2s!4v1626371523927!5m2!1sru!2s"
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <a class="btn "
+                        href="https://www.google.com/maps?ll=41.641532,69.764278&z=16&t=m&hl=ru&gl=US&mapclient=embed&daddr=%D0%93%D0%BE%D1%81%D1%82%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D1%8B%D0%B9+%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81+%22Heaven%27s+Garden%22+41.641702+69+763834@41.6415316,69.7642783">Посмотреть
+                        маршрут</a>
+                </div>
+            </div>
+
+        </section>
+
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-2">
+                        <img src="{% static 'img/logo.svg' %}" class="img-fluid" alt="" srcset="">
+                    </div>
+
+                    <div class="col-lg-2 col-6 px-sm-2 pr-0 ">
+                        <div class="span">
+                            Карта сайта
+                        </div>
+                        <div class="a">
+                            <a href="#appartament">
+                                Номера
+                            </a>
+                        </div>
+                        <div class="a">
+                            <a href="#kitchen">
+                                Ресторан
+                            </a>
+                        </div>
+                        <div class="a">
+                            <a href="">
+                                Отдых
+                            </a>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+
+                    <div class="col-lg-3 col-6 px-sm-2 p-0 footer_100">
+                        <div class="span">
+                            Контакты
+                        </div>
+                        <div class="a">
+                            <a href="tel: + 998 (70) 202-01-01">
+                                + 998 (70) 202-01-01
+                            </a>
+                        </div>
+                        <div class="a">
+                            <a href="mailto: heavensg@gmail.com">
+                                heavensg@gmail.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 d-flex flex-column text-lg-right text-center justify-content-lg-end ">
+
+                        <div class="d-flex social justify-content-lg-end justify-content-center">
+                            <a href="">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="">
+                                <i class="fab fa-telegram-plane"></i>
+                            </a>
+                            <a href="">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <div>OOO “HEAVEN’S GARDEN” 2019</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+
+
+
+
+    <script src="{% static 'js/jquary.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="{% static 'js/moment.min.js' %}"></script>
+    <script src="{% static 'js/daterangepicker.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://kit.fontawesome.com/cb3bbb09f5.js" crossorigin="anonymous"></script>
+    <script>
+        $('#picker').daterangepicker({
+            opens: 'center',
+        }
+            , function (start, end) {
+                console.log(start._d)
+                console.log(end._d)
+            }
+        );
+    </script>
+</body>
+
+</html>

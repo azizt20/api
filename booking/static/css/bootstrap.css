@@ -576,14 +576,6 @@ pre code {
   }
 }
 
-@media (min-width: 1440px) {
-  .container, .container-sm, .container-md, .container-lg, .container-xl {
-    max-width: 1240px;
-  }
-}
-
-
-
 .row {
   display: -ms-flexbox;
   display: flex;
@@ -4269,9 +4261,9 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link {
   margin-bottom: -1px;
-  /* border: 1px solid transparent;
+  border: 1px solid transparent;
   border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem; */
+  border-top-right-radius: 0.25rem;
 }
 
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {

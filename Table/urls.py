@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from booking.views import index
+from booking.views import home, relax, kitchen, booking, room
 from booking.models import *
 from booking.serializers import *
 
@@ -24,6 +24,10 @@ from booking.serializers import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name="index"),
+    path('', home, name="home"),
+    path('booking/', booking, name="booking"),
+    path('room/', room, name="room"),
+    path('kitchen/', kitchen, name="kitchen"),
+    path('relax/', relax, name="relax"),
     path('api/', include('booking.urls'))
 ]
