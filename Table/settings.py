@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'booking',
-
     'dashboard',
     'rest_framework',
 
@@ -139,3 +138,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "media"

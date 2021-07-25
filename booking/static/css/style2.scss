@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap');
 
 h1,
 h2,
@@ -6,7 +6,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Dela Gothic One", cursive;
+  font-family: 'Prosto One', cursive;
 }
 
 h1 {
@@ -275,14 +275,14 @@ h3 {
 
 
 .bg-svet {
-  position: absolute;
-  width: 442.33px;
-  height: 418.31px;
+  //position: absolute;
+  //width: 442.33px;
+  //height: 418.31px;
   //border: 1px solid white;
-  // background: rgba(251, 236, 99, 0.26);
-  // filter: blur(350px);
-  transform: rotate(-53.8deg);
-  overflow: hidden !important;
+  //// background: rgba(251, 236, 99, 0.26);
+  //// filter: blur(350px);
+  //transform: rotate(-53.8deg);
+  //overflow: hidden !important;
 }
 
 
@@ -440,9 +440,58 @@ h3 {
 
 @media (max-width: 991.98px) {
 
-  .header {
+  .wrapper-room .header, .wrapper-booking .header{  
+    z-index: 10000;
+      background: #E5E5E5 !important;
+    .txt {
+      color: black !important;
+      margin-top: auto !important;
+    }
+    .dropdown{
+      background: transparent;
+    }
+
+  }
+  .header {z-index: 10000;
+    background: #011014 !important;
+    h1{
+      font-size: 47px !important;
+    }
+    .dropdown *{
+      background: transparent !important;
+      border: none;
+    }
+    .collapse {
+      height: 90vh;
+
+      .number {
+        margin-bottom: 60px !important;
+
+        .txt {
+          color: rgba(255, 255, 255, 0.44);
+          font-size: 15px;
+        }
+
+        a {
+          text-decoration: none;
+          font-size: 18px;
+          color: #FFFFFF;
+        }
+      }
+    }
+
     .nav-link {
+      margin-top: 22px;
       padding-left: 15px !important;
+    }
+  }
+  .wrapper-booking , .wrapper-room{
+    .header{
+      .number{
+        a{
+          color: black !important;
+        }
+      }
     }
   }
 
