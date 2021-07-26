@@ -50,10 +50,11 @@ class Order(models.Model):
     user_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=15)
     email = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     @property
     def diff_days(self):
-        return int((self.finish_date - self.start_date).days)
+        return int((self.finish_date - self.start_date).days) + 1
 
     def get_absolute_url(self):
         return f'/{self.room.room_type.slug}/{self.room.slug}/{self.slug}'

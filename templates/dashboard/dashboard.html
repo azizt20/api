@@ -6,9 +6,15 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <title>Dashboard</title>
     <style>
-        .restDay{
+        th {
+            width: 10px !important;
+            height: 15px !important;
+        }
+
+        .restDay {
             background-color: #5a5e63;
         }
+
         .popover {
             color: black;
         }
@@ -44,50 +50,41 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'order_list' %}">Orders List<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
-                   data-toggle="dropdown" aria-expanded="false">
-                    Link
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Link</a>
-            </li>
+
         </ul>
-        <form class="d-flex">
-            <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        {#        <form class="d-flex">#}
+        {#            <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">#}
+        {#            <button class="btn btn-outline-success" type="submit">Search</button>#}
+        {#        </form>#}
     </div>
 </nav>
 
 
 {#<div class="row">#}
 <div class="  w-100 p-0 overflow-auto">
-    <div class="container h5 my-2">{{ current_Date }}</div>
+    <div class="d-flex px-2 py-2 border justify-content-between">
+        <div class="h5 my-0">Today: {{ current_Date }}</div>
+        <div class="d-flex">
+            <a class="btn btn-dark mr-5" href="{% url 'dashboard' %}">today</a>
+            <input name="date" class="form-control mr-2 choosedate" type="date" placeholder="" aria-label="Search">
+            <a href="{% url 'dashboard' %}" class="btn btn-success tugma" type="submit">reset</a>
+        </div>
+    </div>
     <table class="table table-bordered table-dark ">
         <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col" class="p-0">#</th>
             {#    {% if month %}adasdasdasd{% endif %}#}
             {% for days in month %}
                 {% if days.date == current_Date %}
-                    <th scope="col" style="background-color: lightslategray">{{ days.day }}</th>
+                    <th scope="col" class="p-0 text-center" style="background-color: lightsteelblue">{{ days.day }}</th>
                 {% elif days.weekday == 5 or days.weekday == 6 %}
-                    <th scope="col" class="restDay">{{ days.day }}</th>
+                    <th scope="col" class="p-0 text-center restDay">{{ days.day }}</th>
                 {% else %}
-                    <th scope="col" class="">{{ days.day }}</th>
+                    <th scope="col" class="p-0 text-center">{{ days.day }}</th>
                 {% endif %}
             {% endfor %}
         </tr>
@@ -123,12 +120,11 @@
                                         data-phone="{{ found.phone_number }}"
                                         data-email="{{ found.email }}"
                                         class="{% if found.finish_date <= current_Date %}
-
                                         bg-secondary
                                         {% else %}
                                         ordered
                                         {% endif %}
-                                        ali"><a type="button"
+                                            ali"><a type="button"
                                             {% if found.finish_date <= current_Date %}
                                             {% else %}
                                                 data-toggle="modal" data-target="#exampleModal2"
@@ -341,6 +337,14 @@
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 <script>
+
+    $(".choosedate").change(function () {
+        console.log('ishlabturibdi')
+        a = $(this).val()
+        $('a.tugma').attr('href', "{% url 'dashboard' %}" + a + "/")
+    })
+
+
     $('.aziz').click(function () {
         let day = $(this).data("day")
         let month = $(this).data("month")

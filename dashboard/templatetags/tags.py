@@ -24,7 +24,7 @@ def filter_me(data):
 
 @register.simple_tag()
 def build_key(room, day):
-    return "{}_{:%Y-%m-%d}".format(room.room_type, day)
+    return "{}_{:%Y-%m-%d}".format(room.id, day)
 
 
 @register.simple_tag()
