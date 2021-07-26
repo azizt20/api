@@ -16,38 +16,70 @@
 
 <body>
 
-    <section class="wrapper-booking">
+
+<section class="wrapper-booking">
 
 
-        <header class="header position-absolute w-100 ">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg px-3 px-md-0">
-                    <a class="navbar-brand" href="{%  url 'home' %}"><img src="{% static 'img/logo2.svg' %}" class="img-fluid" alt=""
-                            srcset=""></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+    <header class="header position-absolute w-100 ">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg px-3 px-md-0">
+                <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/logo2.svg' %}"
+                                                                     class="img-fluid" alt=""
+                                                                     srcset=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class=" collapse navbar-collapse justify-content-lg-end justify-content-start" id="navbarNav">
-                        <div class=" navbar-nav align-items-lg-center ">
-                            <a class="nav-link active" href="{%  url 'room' %}">Номера <span class="sr-only">(current)</span></a>
-                            <a class="nav-link active" href="{%  url 'kitchen' %}">Ресторан</a>
-                            <a class="nav-link active" href="{%  url 'relax' %}">Отдых</a>
-                            <a class="nav-link active d-flex" href="#"><img src="{% static 'img/home/en.png' %}" class="mr-2 img-fluid"
-                                    alt=""> EN</a>
+                    <img src="{% static 'img/gam2.png' %}" alt="">
+
+                </button>
+                <div class=" collapse navbar-collapse justify-content-lg-end justify-content-start" id="navbarNav">
+                    <div class=" navbar-nav align-items-center ">
+                        <a class="nav-link active d-none d-lg-block" href="tel:+ 998 (70) 202-01-01">+ 998 (70)
+                            202-01-01</a>
+
+                        <div class="dropdown nav-link active">
+                            <button class=" border-0 " type="button" id="dropdownMenuButton"
+                                    style="background: transparent"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Номера
+                            </button>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                {% for room_info in r_all %}
+
+                                    <a class="dropdown-item "
+                                       href="{{ room_info.get_absolute_url }}"
+                                       data-cost="{{ room_info.cost_day }}">
+                                        {{ room_info.type }}
+                                    </a>
+
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                        <a class="nav-link active" href="{% url 'kitchen' %}">Ресторан</a>
+                        <a class="nav-link active" href="{% url 'relax' %}">Отдых</a>
+                        <a class="nav-link active d-flex" href="#"><img src="{% static 'img/home/en.png' %}"
+                                                                        class="mr-2 img-fluid"
+                                                                        alt=""> EN</a>
+                        <div class="nav-link d-flex flex-column d-lg-none  number mt-auto text-center">
+                            <div class="txt">Номер для брони:</div>
+                            <a href="tel:+ 998 (70) 202-01-01">+ 998 (70) 202-01-01</a>
                         </div>
                     </div>
-                </nav>
-            </div>
+                </div>
+            </nav>
+        </div>
 
-        </header>
+    </header>
 
 
+    <section class="section1">
+        <div class="container info">
+            <h2>Бронирование номера</h2>
+            <form method="post" action="{% url  'post-booking' %}?slug={{ room.slug }}">
+                {% csrf_token %}
 
-
-        <section class="section1">
-            <div class="container info">
-                <h2>Бронирование номера</h2>
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="row">
@@ -59,20 +91,27 @@
                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Имя и
                                             фамилия</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="inputName">
+                                            <input type="text" name="user_name" class="form-control" id="inputName">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Номер
                                             телефона</label>
                                         <div class="col-sm-8">
-                                            <input type="number" class="form-control" id="inputName">
+                                            <input type="tel" name="phone_number" placeholder="+998 _ _ _ _ _ _ _ _ _" class="form-control"
+                                                   id="inputName">
+                                            {% if messages %}
+                                            {% for message in messages %}
+                                                <small class="text-danger ">{{ message }}</small>
+                                            {% endfor %}
+                                        {% endif %}
                                         </div>
+
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-sm-4 col-form-label">Email</label>
                                         <div class="col-sm-8">
-                                            <input type="email" class="form-control" id="inputEmail3">
+                                            <input type="email" name="email" class="form-control" id="inputEmail3">
                                         </div>
                                     </div>
 
@@ -80,21 +119,21 @@
                                     <fieldset class="form-group row row-cols-1 row-cols-md-3  d-flex px-3">
                                         <div class="form-check ">
                                             <input class="form-check-input" type="radio" name="pay" id="gridRadios1"
-                                                value="option1" checked>
+                                                   value="cash" checked>
                                             <label class="form-check-label" for="gridRadios1">
                                                 Наличными
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="pay" id="gridRadios2"
-                                                value="option2">
+                                                   value="payme">
                                             <label class="form-check-label" for="gridRadios2">
                                                 <img src="{% static 'img/booking/payme.png' %}" alt="">
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="pay" id="gridRadios3"
-                                                value="option3">
+                                                   value="click">
                                             <label class="form-check-label" for="gridRadios3">
                                                 <img src="{% static 'img/booking/click.png' %}" alt="">
                                             </label>
@@ -131,7 +170,8 @@
                                 </div>
                                 <sapn>При отмене брони за двое суток (48 часов), мы вернем вам полную стоимость,
                                     позже – 50% от всей суммы. В случае отмены брони в день приезда, предоплата не
-                                    возвращается.</sapn>
+                                    возвращается.
+                                </sapn>
                             </div>
                             <div class="paragraph d-flex">
                                 <div>
@@ -142,37 +182,37 @@
                         </div>
                     </div>
                     <div class="col-lg-5 ">
+                        <input type="hidden" name="room" value="{{ room.type }}">
+                        <input type="hidden" name="start_date" value="{{ request.GET.sd }}">
+                        <input type="hidden" name="finish_date" value="{{ request.GET.sd }}">
+                        <input type="hidden" name="order_cost" value="{{ room.cost_day }}">
+                        <input type="hidden" name="days">
+                        {#                        <input type="hidden" name="finish_date" value="{{ request.GET.ed }}">#}
+
                         <div class="col form mx-md-auto " style="width: 380px;">
                             <div class="form-group">
                                 <div style="font-size: 25px;" class="mb-4 text-center"><b>Найти номер</b></div>
                                 <span>Вид номера</span>
                                 <div class="dropdown  p-0 d-flex align-items-center w-100">
                                     <button class="btn w-100 justify-content-center form-control" type="button"
-                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        Эконом
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        {{ room.type }}
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <div class="dropdown-item sect d-flex align-items-center"
-                                            data-cost="2000000 " id="1" href=""><span>Эконом</span>
-                                            <div class="ml-auto">от 2 млн</div>
-                                        </div>
-                                        <div class="dropdown-item sect d-flex align-items-center"
-                                            data-cost="3000000 " href=""><span>Стандарт</span>
-                                            <div class="ml-auto">от 3 млн</div>
-                                        </div>
-                                        <div class="dropdown-item sect d-flex align-items-center"
-                                            data-cost="4000000 " href=""><span>Полулюкс</span>
-                                            <div class="ml-auto">от 4 млн</div>
-                                        </div>
-                                        <div class="dropdown-item sect d-flex align-items-center"
-                                            data-cost="4500000 " href=""><span>Люкс</span>
-                                            <div class="ml-auto">от 4,5 млн</div>
-                                        </div>
-                                        <div class="dropdown-item sect d-flex align-items-center"
-                                            data-cost="5000000 " href=""><span>Семейный</span>
-                                            <div class="ml-auto">от 5 млн</div>
-                                        </div>
+                                    <div class="dropdown-menu d-none" aria-labelledby="dropdownMenuButton">
+                                        {% for room_info in r_all %}
+
+
+
+                                            <a class="dropdown-item sect d-flex align-items-center"
+                                                    {#                                           href="{{ room_info.get_absolute_url }}"#}
+                                               data-cost="{{ room_info.cost_day }}">
+                                                <span>{{ room_info.type }}</span>
+                                                <div class="ml-auto">от {{ room_info.min_cost }} млн</div>
+                                            </a>
+
+                                        {% endfor %}
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -183,20 +223,23 @@
                                         <span>Выезд</span>
                                     </div>
                                 </div>
-                                <input type="text" id="picker" class="form-control text-center">
+                                <input type="text" id="picker" class="form-control text-center" name="s&f_date"
+                                        {% if request.GET.sd %}
+                                       value="{{ request.GET.sd }} - {{ request.GET.ed }}"
+                                        {% endif %} >
                                 <span>Гостей</span>
                                 <a class="btn border form-control text-left d-flex justify-content-between collapse1 mt-2  position-relative"
-                                    data-toggle="collapse" href="#multiCollapseExample1" role="button"
-                                    aria-expanded="false" aria-controls="multiCollapseExample1">
+                                   data-toggle="collapse" href="#multiCollapseExample1" role="button"
+                                   aria-expanded="false" aria-controls="multiCollapseExample1">
                                     2 взрослых <span style="font-size: 20px;">&#8249;</span>
 
                                 </a>
                                 <div class="collapse collapse12 multi-collapse position-absolute  w-75"
-                                    id="multiCollapseExample1">
+                                     id="multiCollapseExample1">
                                     <div class="card card-body w-100">
                                         <div class="col p-0 m-0 w-100">
                                             <div
-                                                class="persons d-flex justify-content-between align-items-center w-100 ">
+                                                    class="persons d-flex justify-content-between align-items-center w-100 ">
                                                 <div>
                                                     <div>
                                                         <b>
@@ -208,18 +251,20 @@
                                                 </div>
                                                 <div class="number-input ml-auto">
                                                     <button
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                                        class="minus">-</button>
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                            class="minus">-
+                                                    </button>
                                                     <input class="quantity" min="0" name="quantity" value="1"
-                                                        type="number">
+                                                           type="number">
                                                     <button
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                                        class="plus">+</button>
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                            class="plus">+
+                                                    </button>
                                                 </div>
                                             </div>
 
                                             <div
-                                                class="persons d-flex justify-content-between align-items-center w-100 ">
+                                                    class="persons d-flex justify-content-between align-items-center w-100 ">
                                                 <div>
                                                     <div>
                                                         <b>
@@ -232,18 +277,20 @@
                                                 </div>
                                                 <div class="number-input ml-auto">
                                                     <button
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                                        class="minus">-</button>
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                            class="minus">-
+                                                    </button>
                                                     <input class="quantity" min="0" name="quantity" value="0"
-                                                        type="number">
+                                                           type="number">
                                                     <button
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                                        class="plus">+</button>
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                            class="plus">+
+                                                    </button>
                                                 </div>
                                             </div>
 
                                             <div
-                                                class="persons d-flex justify-content-between align-items-center w-100 ">
+                                                    class="persons d-flex justify-content-between align-items-center w-100 ">
                                                 <div>
                                                     <div>
                                                         <b>
@@ -256,13 +303,15 @@
                                                 </div>
                                                 <div class="number-input ml-auto">
                                                     <button
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                                        class="minus">-</button>
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                            class="minus">-
+                                                    </button>
                                                     <input class="quantity" min="0" name="quantity" value="0"
-                                                        type="number">
+                                                           type="number">
                                                     <button
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                                        class="plus">+</button>
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                            class="plus">+
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -270,111 +319,106 @@
                                 </div>
 
                                 <span
-                                    class="d-flex align-items-center form-control border-0 text-left chack py-0 h-auto">
+                                        class="d-flex align-items-center form-control border-0 text-left chack py-0 h-auto">
                                     <input class="" type="checkbox" id="inlineCheckbox1" value="option1">
                                     <label class="form-check-label ml-2" for="inlineCheckbox1">Домашнее животное</label>
                                 </span>
                                 <div class="form-control border-0 mt-0 p-0  h-auto total_cost"
-                                    style="font-size: 20px; text-align: center;"><b class="total_cost_e">2 500 000 млн сумов</b></div>
-                                <button class="btn w-100 booking">Забронировать</button>
+                                     style="font-size: 20px; text-align: center;"><b
+                                        class="total_cost_e" data-cost="{{ room.cost_day }}">{{ room.cost_day }} млн
+                                    сумов</b></div>
+                                <a>
+                                    <button type="submit" class="btn w-100 booking">Забронировать</button>
+                                </a>
                             </div>
 
 
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-
-
-
-
-
-
-
-
-
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-2">
-                        <img src="{% static 'img/logo.svg' %}" class="img-fluid" alt="" srcset="">
-                    </div>
-
-                    <div class="col-lg-2 col-6 px-sm-2 pr-0 ">
-                        <div class="span">
-                            Карта сайта
-                        </div>
-                        <div class="a">
-                            <a href="#appartament">
-                                Номера
-                            </a>
-                        </div>
-                        <div class="a">
-                            <a href="#kitchen">
-                                Ресторан
-                            </a>
-                        </div>
-                        <div class="a">
-                            <a href="">
-                                Отдых
-                            </a>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-
-                    <div class="col-lg-3 col-6 px-sm-2 p-0 footer_100">
-                        <div class="span">
-                            Контакты
-                        </div>
-                        <div class="a">
-                            <a href="tel: + 998 (70) 202-01-01">
-                                + 998 (70) 202-01-01
-                            </a>
-                        </div>
-                        <div class="a">
-                            <a href="mailto: heavensg@gmail.com">
-                                heavensg@gmail.com
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-5 d-flex flex-column text-lg-right text-center justify-content-lg-end ">
-
-                        <div class="d-flex social justify-content-lg-end justify-content-center">
-                            <a href="">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="">
-                                <i class="fab fa-telegram-plane"></i>
-                            </a>
-                            <a href="">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
-                        <div>OOO “HEAVEN’S GARDEN” 2019</div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
+            </form>
+        </div>
     </section>
 
 
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-2">
+                    <img src="{% static 'img/logo.svg' %}" class="img-fluid" alt="" srcset="">
+                </div>
+
+                <div class="col-lg-2 col-6 px-sm-2 pr-0 ">
+                    <div class="span">
+                        Карта сайта
+                    </div>
+                    <div class="a">
+                        <a href="#appartament">
+                            Номера
+                        </a>
+                    </div>
+                    <div class="a">
+                        <a href="#kitchen">
+                            Ресторан
+                        </a>
+                    </div>
+                    <div class="a">
+                        <a href="">
+                            Отдых
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <br>
+
+                <div class="col-lg-3 col-6 px-sm-2 p-0 footer_100">
+                    <div class="span">
+                        Контакты
+                    </div>
+                    <div class="a">
+                        <a href="tel: + 998 (70) 202-01-01">
+                            + 998 (70) 202-01-01
+                        </a>
+                    </div>
+                    <div class="a">
+                        <a href="mailto: heavensg@gmail.com">
+                            heavensg@gmail.com
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 d-flex flex-column text-lg-right text-center justify-content-lg-end ">
+
+                    <div class="d-flex social justify-content-lg-end justify-content-center">
+                        <a href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                        <a href="">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div>OOO “HEAVEN’S GARDEN” 2019</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</section>
 
 
-
-    <script src="{% static 'js/jquary.js' %}"></script>
-    <script src="{% static 'js/bootstrap.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-    <script src="{% static 'js/moment.min.js' %}"></script>
-    <script src="{% static 'js/daterangepicker.js' %}"></script>
-    <script src="{% static 'js/script.js' %}"></script>
-    <script src="https://kit.fontawesome.com/cb3bbb09f5.js" crossorigin="anonymous"></script>
+<script src="{% static 'js/jquary.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="{% static 'js/moment.min.js' %}"></script>
+<script src="{% static 'js/daterangepicker.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="https://kit.fontawesome.com/cb3bbb09f5.js" crossorigin="anonymous"></script>
 
 </body>
 

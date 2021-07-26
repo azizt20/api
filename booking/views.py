@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from .models import RoomType, Room, Order, Menu
+from django.shortcuts import render, redirect
+from django.views.generic import View
+from django.contrib import messages
+from .models import RoomType, Room, Order, Menu, Room_info, Room_photo, Items, Order_waiting
 from rest_framework import generics
 from rest_framework.response import Response
 from .serializers import DateModelSerializer, RoomTypeModelSerializer, RoomModelSerializer, OrderModelSerializer, \
@@ -17,22 +19,31 @@ for i in range(30):
 
 
 def home(request):
-    # room = Room.objects.all()
-    return render(request, 'home.html')
-    # return render(request, 'index.html', {'r': room, 'd': qwerty})
+    room_all = RoomType.objects.all()
+    return render(request, 'home.html', {'r_all': room_all})
+
 
 def room(request):
     return render(request, 'room.html')
 
-def booking(request):
-    return render(request, 'booking.html')
+
+# def booking(request):
+#     return render(request, 'booking.html')
 
 def relax(request):
-    return render(request, 'relax.html')
+    room_all = RoomType.objects.all()
+    return render(request, 'relax.html', {'r_all': room_all})
+
 
 def kitchen(request):
     menu = Menu.objects.all()
-    return render(request, 'kitchen.html', {'m': menu})
+    room_all = RoomType.objects.all()
+    return render(request, 'kitchen.html', {'m': menu, 'r_all': room_all})
+
+
+def room(request):
+    room_info = Room_info.objects.all()
+    return render(request, 'room.html', {'r_i': room_info})
 
 
 class RoomTypeList(generics.ListCreateAPIView):
@@ -64,3 +75,48 @@ class Order1List(generics.ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = Order1ModelSerializer
 
+
+class RoomTypeView(View):
+    def get(self, request, slug):
+        room = RoomType.objects.get(slug=slug)
+        room_all = RoomType.objects.all()
+        return render(request, 'room_type.html', {'room': room, 'r_all': room_all})
+
+
+class RoomTypeBookingView(View):
+    def get(self, request, slug):
+        room = RoomType.objects.get(slug=slug)
+        room_all = RoomType.objects.all()
+        request.session['type'] = room.type
+        return render(request, 'booking.html', {'room': room, 'r_all': room_all})
+
+
+def post_booking(request):
+    if request.method == 'POST':
+        room = request.POST.get('room')
+        start_date = request.POST.get('start_date')
+        finish_date = request.POST.get('finish_date')
+        order_cost = request.POST.get('order_cost')
+        user_name = request.POST.get('user_name')
+        phone_number = request.POST.get('phone_number')
+        email = request.POST.get('email')
+        pay = request.POST.get('email')
+        valid_phone = None
+        if phone_number.startswith('+') and phone_number[1:].isdigit():
+            valid_phone = phone_number
+        else:
+            messages.warning(request, 'введите номер в правельном формате ')
+            return redirect('booking', request.GET.get('slug'))
+
+        wait = Order_waiting()
+        wait.room = room
+        wait.start_date = str(start_date)
+        wait.finish_date = str(finish_date)
+        wait.order_cost = order_cost
+        wait.user_name = user_name
+        wait.phone_number = valid_phone
+        wait.email = email
+        wait.pay = pay
+        wait.save()
+        return redirect('home')
+    return render(request, 'booking.html')

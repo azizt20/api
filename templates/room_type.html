@@ -1,4 +1,6 @@
 {% load static %}
+{% load my_filter %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,59 +8,59 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
-    <link rel="icon" sizes="" type="image/png" href="{% static 'img/logo.svg' %}">
+    <title>Room</title>
+    <link rel="icon" sizes=" " type="image/png" href="{% static 'img/logo.svg' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
     <link rel="stylesheet" href="{% static 'css/style2.css' %}">
 </head>
 
 <body>
-
-<section class="wrapper-home">
+{{ room_all.0 }}
+<section class="wrapper-room">
 
 
     <header class="header position-absolute w-100 ">
         <div class="container">
             <nav class="navbar navbar-expand-lg px-3 px-md-0">
-                <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/logo.svg' %}" class="img-fluid"
-                                                                     alt=""
+                <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/logo2.svg' %}"
+                                                                     class="img-fluid" alt=""
                                                                      srcset=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <img src="{% static 'img/gam.png' %}" alt="">
+                    <img src="{% static 'img/gam2.png' %}" alt="">
+
                 </button>
-                <div class=" collapse navbar-collapse justify-content-lg-end " id="navbarNav">
+                <div class=" collapse navbar-collapse justify-content-lg-end justify-content-start" id="navbarNav">
                     <div class=" navbar-nav align-items-center ">
-                                            <a class="nav-link active d-none d-lg-block" href="tel:+ 998 (70) 202-01-01">+ 998 (70) 202-01-01</a>
+                        <a class="nav-link active d-none d-lg-block" href="tel:+ 998 (70) 202-01-01">+ 998 (70)
+                            202-01-01</a>
 
                         <div class="dropdown nav-link active">
-                            <button class=" border-0 text-white" type="button" id="dropdownMenuButton" style="background: transparent"
+                            <button class=" border-0 " type="button" id="dropdownMenuButton"
+                                    style="background: transparent"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Номера
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                 {% for room_info in r_all %}
+                                {% for room_info in r_all %}
 
+                                    <a class="dropdown-item "
+                                       href="{{ room_info.get_absolute_url }}"
+                                       data-cost="{{ room_info.cost_day }}">
+                                        {{ room_info.type }}
+                                    </a>
 
-
-                                        <a class="dropdown-item "
-                                           href="{{ room_info.get_absolute_url }}"
-                                           data-cost="{{ room_info.cost_day }}"
-                                           >
-                                            {{ room_info.type }}
-                                        </a>
-
-                                    {% endfor %}
+                                {% endfor %}
 
                             </div>
                         </div>
                         <a class="nav-link active" href="{% url 'kitchen' %}">Ресторан</a>
                         <a class="nav-link active" href="{% url 'relax' %}">Отдых</a>
-                        <a class="nav-link active d-flex" href=""><img src="{% static 'img/home/en.png' %}"
-                                                                       class="mr-2 img-fluid"
-                                                                       alt=""> EN</a>
+                        <a class="nav-link active d-flex" href="#"><img src="{% static 'img/home/en.png' %}"
+                                                                        class="mr-2 img-fluid"
+                                                                        alt=""> EN</a>
                         <div class="nav-link d-flex flex-column d-lg-none  number mt-auto text-center">
                             <div class="txt">Номер для брони:</div>
                             <a href="tel:+ 998 (70) 202-01-01">+ 998 (70) 202-01-01</a>
@@ -70,42 +72,131 @@
 
     </header>
 
-
     <section class="section1">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 d-flex align-items-center" id="booking">
-                    <h1>Бронируйте незабываемый отдых в горах Акташа </h1>
+                <div class="col-md-8">
+                    <img src="{{ room.photo1.url }}" class="img-fluid w-100" alt="">
                 </div>
+                <div class="col-md-4 d-flex flex-column justify-content-between">
+                    <img src="{{ room.photo2.url }}" class="img-fluid w-100" alt="">
+                    <img src="{{ room.photo3.url }}" class="img-fluid w-100" alt="">
+                </div>
+                <div class="col-md-8 row info">
+                    <div class="col-lg-7">
+                        <h2 id="opaae">{{ room.title }}</h2>
+                        <span>
+                               {{ room.info }}
+                            </span>
+                    </div>
+                    <div class="col-lg-5 col-sm-8  text-right pr-0">
+                        <div class="dropdown w-100">
+                            <button class="btn blya w-100 " type="button" id="dropdownMenuButton"
+                                    data-cost="{{ room.cost_day }}"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ room.cost_day }} сум/сутки
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                {% for room_info in r_all %}
 
-                <div class="col-md-6 ">
-                    {#                    <form class="w-100" method="post" action="{% url 'post_order_waiting' %}">#}
 
-                    {#                    {% csrf_token %}#}
 
-                    <div class="col form ml-md-auto " style="width: 380px;">
-                        <div class="form-group">
-                            <div style="font-size: 25px;" class="mb-4 text-center"><b>Найти номер</b>
+                                    <a class="dropdown-item sect d-flex align-items-center"
+                                       href="{{ room_info.get_absolute_url }}"
+                                       data-cost="{{ room_info.cost_day }}">
+                                        <span>{{ room_info.type }}</span>
+                                        <div class="ml-auto">от {{ room_info.min_cost }} млн</div>
+                                    </a>
+
+                                {% endfor %}
+
+
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <h3>Удобства</h3>
+                    <div class="row">
+                        <div class="col-md-8 row row-cols-1 row-cols-md-2 comfort">
+                            <div class="col items ">
+                                <div><img src="{% static 'img/room/fen.png' %}" alt=""></div>
+                                <span>Фен</span>
+                            </div>
+                            <div class="col items">
+                                <div><img src="{% static 'img/room/phone.png' %}" alt=""></div>
+                                <span>Стационарный телефон</span>
+                            </div>
+                            <div class="col items">
+                                <div><img src="{% static 'img/room/wi-fi.png' %}" alt=""></div>
+                                <span>Wi-Fi</span>
+                            </div>
+                            <div class="col items">
+                                <div><img src="{% static 'img/room/tv.png' %}" alt=""></div>
+                                <span>Телевизор </span>
+                            </div>
+                            <div class="col items">
+                                <div><img src="{% static 'img/room/dish.png' %}" alt=""></div>
+                                <span>Завтрак</span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-12 important px-0">
+                        <h3>
+                            Важно знать перед приездом
+                        </h3>
+                        <div class="paragraph d-flex">
+                            <div>
+                                <img src="{% static 'img/room/v.png' %}" alt="" class="">
+                            </div>
+                            <sapn>У нас действует 100% предоплата любым удобным для вас способом</sapn>
+                        </div>
+                        <div class="paragraph d-flex">
+                            <div>
+                                <img src="{% static 'img/room/v.png' %}" alt="" class="">
+                            </div>
+                            <sapn>При отмене брони за двое суток (48 часов), мы вернем вам полную стоимость,
+                                позже – 50% от всей суммы. В случае отмены брони в день приезда, предоплата не
+                                возвращается.
+                            </sapn>
+                        </div>
+                        <div class="paragraph d-flex">
+                            <div>
+                                <img src="{% static 'img/room/v.png' %}" alt="" class="">
+                            </div>
+                            <sapn>Заезд в номер в 14:00, выезд в 12:00.</sapn>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 ">
+                    <div class="col form ml-lg-auto  " style="width: 380px;">
+                        <div class="form-group">
+                            <div style="font-size: 25px;" class="mb-4 text-center"><b>Найти номер</b></div>
                             <span>Вид номера</span>
                             <div class="dropdown  p-0 d-flex align-items-center w-100">
-                                <button class="btn w-100 justify-content-center form-control"
-                                        type="button"
-                                        id="dropdownMenuButton" data-toggle="dropdown" data-cost=""
-                                        aria-haspopup="true"
+                                <button class="btn w-100 justify-content-center form-control" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
-                                    {#                                        <input type="button" class="typee" value="asdas">#}
-
+                                    {{ room.type }}
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="id_types">
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     {% for room_info in r_all %}
 
 
 
                                         <a class="dropdown-item sect d-flex align-items-center"
-                                           data-href="{% url 'booking' room_info.slug %}"
-                                           data-cost="{{ room_info.cost_day }}"
-                                           id="{{ room_info.id }}">
+                                           href="{{ room_info.get_absolute_url }}"
+                                           data-cost="{{ room_info.cost_day }}">
                                             <span>{{ room_info.type }}</span>
                                             <div class="ml-auto">от {{ room_info.min_cost }} млн</div>
                                         </a>
@@ -122,7 +213,10 @@
                                     <span>Выезд</span>
                                 </div>
                             </div>
-                            <input name="startandfinish" type="text" id="picker" class="form-control text-center">
+                            <input type="text" id="picker" class="form-control text-center"
+                                    {% if request.GET.sd %}
+                                   value="{{ request.GET.sd }} - {{ request.GET.ed }}"
+                                    {% endif %}  >
                             <span>Гостей</span>
                             <a class="btn border form-control text-left d-flex justify-content-between collapse1 mt-2  position-relative"
                                data-toggle="collapse" href="#multiCollapseExample1" role="button"
@@ -150,8 +244,7 @@
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                                                         class="minus">-
                                                 </button>
-                                                <input class="quantity" min="0" name="quantity"
-                                                       value="1"
+                                                <input class="quantity" min="0" name="quantity" value="1"
                                                        type="number">
                                                 <button
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
@@ -177,8 +270,7 @@
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                                                         class="minus">-
                                                 </button>
-                                                <input class="quantity" min="0" name="quantity"
-                                                       value="0"
+                                                <input class="quantity" min="0" name="quantity" value="0"
                                                        type="number">
                                                 <button
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
@@ -204,8 +296,7 @@
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                                                         class="minus">-
                                                 </button>
-                                                <input class="quantity" min="0" name="quantity"
-                                                       value="0"
+                                                <input class="quantity" min="0" name="quantity" value="0"
                                                        type="number">
                                                 <button
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
@@ -224,204 +315,71 @@
                                 </span>
                             <div class="form-control border-0 mt-0 p-0  h-auto total_cost"
                                  style="font-size: 20px; text-align: center;"><b
-                                    class="total_cost_e">
-                                <input name="totalcpst" class="total_cost_e" type="number"
-                                       value="{{ room.cost_day }} млн">
+                                    class="total_cost_e" data-cost="{{ room.cost_day }}"> {{ room.cost_day }} млн
                                 сумов</b></div>
-                            <a class="done" href="">
-
-                                <button type="submit" class="btn w-100 booking">Забронировать</button>
+                            <a id="ahref" href="" data-href="{% url 'booking' room.slug %}">
+                                <button class="btn w-100 booking">Забронировать</button>
                             </a>
                         </div>
 
                     </div>
-
-
                 </div>
-
             </div>
-
         </div>
-    </section>
-
-
-    <section class="section2">
-
-        <div class="container">
-            <div class="section2-content row">
-                <div class="col-md-5 d-flex flex-column justify-content-end">
-                    <div class="bg-svet"></div>
-                    <p>
-                    <h2>
-                        Летний и зимний
-                        <br> бассейн
-                    </h2>
-                    </p>
-                    <span>
-                            120 кв.м летнего бассейна <br>
-                            с видом на горы. И уютный зимний <br>
-                            бассейн с регулируемой температурой <br> для вашего комфорта
-                        </span>
-                </div>
-                <div class="col-md-7 d-flex align-items-center">
-                    <img src="{% static 'img/home/section2.jpg' %}" class="img-fluid  w-100" alt="" srcset="">
-                </div>
-            </div>
-
-            <div id="appartament">
-                <img src="{% static 'img/home/pool.jpg' %}" class="img-fluid pool" alt="" srcset="">
-                <a href="">Что есть еще? →</a>
-            </div>
-
-            <img src="{% static 'img/home/appartament.jpg' %}" class="img-fluid appartament" alt="" srcset="">
-            <h2>
-                Огромная территория для прогулок, <br>
-                свежий горный воздух
-            </h2>
-
-            <div class="" id="kitchen">
-                <div class="row kitchen">
-                    <div class="col-md-7 d-flex ">
-                        <img src="{% static 'img/home/salat.jpg' %}" class="img-fluid my-auto" alt="" srcset="">
-                    </div>
-                    <div class="col-md-5 d-flex flex-column justify-content-end">
-                        <div class="bg-svet"></div>
-
-                        <h2>
-                            Национальная <br>
-                            и европейская кухня
-                        </h2>
-                        <img src="{% static 'img/home/ice-cream.jpg' %}" class="img-fluid" style="margin-top: 40px;"
-                             alt=""
-                             srcset="">
-                    </div>
-                </div>
-            </div>
-            <a class="m-0" href="">Подробнее о кухне →</a>
-        </div>
-
     </section>
 
 
     <section class="section3">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <p>
-                    <h2>
-                        Что о нас говорят гости
-                    </h2>
-                    </p>
-                    <div>
-                        Собрали честные отзывы наших гостей в соцсетях,
-                        в основном на Фэйсбуке.
-                    </div>
-                </div>
-            </div>
-            <div class="row row-cols-md-3 row-cols-1">
-                <div class="col  ">
-                    <div class="review">
-                        <div class="avatar" style="background-image: url({% static '/img/home/rew1.png' %}); ">
-                        </div>
-
-                        <div class="contant">
-                            <span>Бегзод</span>
-                            <div>
-                                По рекомендации поехали праздновать день рождения сына в Heaven’s Garden. Аниматоры
-                                впечатлили.
-                                Дети счастливы – праздник удался.
+            <h2>
+                Другие номера
+            </h2>
+            <div class="row row-cols-lg-3 row-cols-1">
+                {% for all in r_all %}
+                    <div class="col room pb-4">
+                        <div class="card">
+                            <div id="carouselExampleControls3" class="carousel slide w-100" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="{{ all.photo1.url }}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="{{ all.photo2.url }}" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="{{ all.photo3.url }}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls3" role="button"
+                                   data-slide="prev">
+                                    <span aria-hidden="true"><img src="{% static 'img/room/prev.png' %}" alt=""></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls3" role="button"
+                                   data-slide="next">
+                                    <span aria-hidden="true"><img src="{% static 'img/room/next.png' %}" alt=""></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                            <div class="card-body d-flex flex-column  ">
+                                <div class="card-title d-flex align-items-center justify-content-between">
+                                    <h3 class=""><b>{{ all.type }}</b></h3>
+                                    <span>
+                                        {{ all.min_cost }} млн сумов
+                                    </span>
+                                </div>
+                                <p class="card-text">{{ all.info }} </p>
+                                <a href="{{ all.get_absolute_url }}" class="btn mx-auto">Посмотреть номер</a>
                             </div>
                         </div>
                     </div>
 
-                </div>
+                {% endfor %}
 
-                <div class="col">
-                    <div class="review">
-                        <div class="avatar" style="background-image: url({% static '/img/home/rew2.png' %}); ">
-                        </div>
-
-                        <div class="contant">
-                            <span>Нигора</span>
-                            <div>
-                                Отдыхали в ХГ в июне с мужем. Понравилась кухня, особенно европейская. Советую
-                                попробовать у
-                                них куриные бедрышки и стейк Рибай)
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col">
-                    <div class="review">
-                        <div class="avatar" style="background-image: url({% static '/img/home/rew3.png' %}); ">
-                        </div>
-
-                        <div class="contant">
-                            <span>Стас</span>
-                            <div>
-                                В Хэвансе был два раза. Один раз с друзьями, второй раз один. Не вылезал из хаммама
-                                и
-                                соляной пещеры. В этом сезоне поеду еще раз точно.
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
 
             </div>
         </div>
     </section>
-
-
-    <section class="section4">
-        <div class="container">
-            <h2>Как до нас добраться?</h2>
-            <div class="contacts">
-                <div class="row row-cols-md-2 row-cols-1">
-                    <div class="col info">
-                            <span>
-                                <img src="{% static 'img/home/location.svg' %}" class="img-fluid" alt="" srcset="">
-                                <div>Адрес</div>
-                            </span>
-                        <div class="text">
-                            Бостанлыкский район, заповедник Акташ
-                        </div>
-
-                        <span>
-                                <img src="{% static 'img/home/transport.svg' %}" class="img-fluid" alt="" srcset="">
-                                <div>Трансфер</div>
-                            </span>
-                        <div class="text">
-                            Наш минибас Hyundai заберет вас с Ташкента,
-                            и отвезет обратно. Автомобиль вмещает 10 человек. Стоимость поездки в одну сторону
-                            600.000
-                            сумов.
-                            <br>
-                            <br>
-                            На остальной транспорт цена договорная.
-                        </div>
-
-                        <span>
-                                <img src="{% static 'img/home/telephone.svg' %}" class="img-fluid" alt="" srcset="">
-                                <div>Бронь по телефону:</div>
-                            </span>
-                        <a href="tel: + 998 (70) 202-01-01">+ 998 (70) 202-01-01</a>
-                    </div>
-                    <div class="col">
-                        <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2981.6574305678355!2d69.76208961569786!3d41.641535588163336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38af1f12f3fdd549%3A0xd2c20fbfbf97306d!2z0JPQvtGB0YLQuNC90LjRh9C90YvQuSDQutC-0LzQv9C70LXQutGBICJIZWF2ZW4ncyBHYXJkZW4i!5e0!3m2!1sru!2s!4v1626371523927!5m2!1sru!2s"
-                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                </div>
-                <a class="btn "
-                   href="https://www.google.com/maps?ll=41.641532,69.764278&z=16&t=m&hl=ru&gl=US&mapclient=embed&daddr=%D0%93%D0%BE%D1%81%D1%82%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D1%8B%D0%B9+%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81+%22Heaven%27s+Garden%22+41.641702+69+763834@41.6415316,69.7642783">Посмотреть
-                    маршрут</a>
-            </div>
-        </div>
-
-    </section>
-
 
     <footer class="footer">
         <div class="container">
@@ -488,6 +446,7 @@
             </div>
         </div>
     </footer>
+
 </section>
 
 

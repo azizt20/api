@@ -1,16 +1,24 @@
 import datetime
 
 from django.db import models
+from  django.urls import  reverse_lazy
 
 
 # Create your models here.
 class RoomType(models.Model):
     type = models.CharField(max_length=50, blank=True)
-    min_cost = models.IntegerField()
+    min_cost = models.FloatField()
+    title = models.CharField(max_length=200, null=True, blank=True)
+    info = models.CharField(max_length=200, null=True, blank=True)
+    photo1 = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    photo2 = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    photo3 = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    cost_day = models.IntegerField( null=True, blank=True)
+
     slug = models.SlugField()
 
     def get_absolute_url(self):
-        return f'/{self.slug}'
+        return reverse_lazy('room-name', kwargs={'slug':self.slug})
 
     def __str__(self):
         return f'{self.type}'
@@ -18,11 +26,18 @@ class RoomType(models.Model):
 
 class Room_info(models.Model):
     room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    info = models.CharField(max_length=200)
 
+    def __str__(self):
+        return f'{self.room_type}'
 
 class Room_photo(models.Model):
-    room_type = models.ForeignKey(Room_info, on_delete=models.CASCADE)
+    room_info = models.ForeignKey(Room_info, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='avatars/', null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.id}'
 
 
 class Room(models.Model):
@@ -63,15 +78,16 @@ class Order(models.Model):
         return f'{self.id} '
 
 
+
 class Order_waiting(models.Model):
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='orders_waiting')
-    slug = models.SlugField()
-    start_date = models.DateField()
-    finish_date = models.DateField()
+    room = models.CharField(max_length=200, blank=True)
+    start_date = models.CharField(max_length=200, blank=True)
+    finish_date = models.CharField(max_length=200, blank=True)
     order_cost = models.IntegerField()
-    user_name = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=15)
-    email = models.CharField(max_length=200)
+    pay = models.CharField(max_length=200, blank=True)
+    user_name = models.CharField(max_length=50, blank=True)
+    phone_number = models.CharField(max_length=14, blank=True)
+    email = models.CharField(max_length=200, blank=True)
 
 
 class Menu(models.Model):

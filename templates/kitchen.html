@@ -22,20 +22,48 @@
 
         <div class="container">
             <nav class="navbar navbar-expand-lg px-3 px-md-0">
-                <a class="navbar-brand" href="{%  url 'home' %}"><img src="{% static 'img/logo.svg' %}" class="img-fluid" alt=""
-                                                              srcset=""></a>
+                <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/logo.svg' %}" class="img-fluid"
+                                                                     alt=""
+                                                                     srcset=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <img src="{% static 'img/gam.png' %}" alt="">
+
                 </button>
                 <div class=" collapse navbar-collapse justify-content-lg-end justify-content-start" id="navbarNav">
-                    <div class=" navbar-nav align-items-lg-center ">
-                        <a class="nav-link active" href="{%  url 'room' %}">Номера <span class="sr-only">(current)</span></a>
-                        <a class="nav-link active" href="{%  url 'kitchen' %}">Ресторан</a>
-                        <a class="nav-link active" href="{%  url 'relax' %}">Отдых</a>
+                    <div class=" navbar-nav align-items-center ">
+                                            <a class="nav-link active d-none d-lg-block" href="tel:+ 998 (70) 202-01-01">+ 998 (70) 202-01-01</a>
+
+
+                        <div class="dropdown nav-link active">
+                            <button class=" border-0 text-white" type="button" id="dropdownMenuButton"
+                                    style="background: transparent"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Номера
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                {% for room_info in r_all %}
+
+                                    <a class="dropdown-item "
+                                       href="{{ room_info.get_absolute_url }}"
+                                       data-cost="{{ room_info.cost_day }}">
+                                        {{ room_info.type }}
+                                    </a>
+
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                        <a class="nav-link active" href="{% url 'kitchen' %}">Ресторан</a>
+                        <a class="nav-link active" href="{% url 'relax' %}">Отдых</a>
                         <a class="nav-link active d-flex" href="#"><img src="{% static 'img/home/en.png' %}"
                                                                         class="mr-2 img-fluid"
                                                                         alt=""> EN</a>
+                        <div class="nav-link d-flex flex-column d-lg-none  number mt-auto text-center">
+                            <div class="txt">Номер для брони:</div>
+                            <a href="tel:+ 998 (70) 202-01-01">+ 998 (70) 202-01-01</a>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -195,16 +223,16 @@
                                     {% for m in menu.items_set.all %}
                                         {% if forloop.counter > menu.items_set.all|leng %}
                                             <div class="item">
-                                            <div class="dish">
-                                                {{ m.dish }}
-                                            </div>
-                                            <div class="span"></div>
-                                            <div class="cost">
-                                                <div>
-                                                    {{ m.cost }}
+                                                <div class="dish">
+                                                    {{ m.dish }}
+                                                </div>
+                                                <div class="span"></div>
+                                                <div class="cost">
+                                                    <div>
+                                                        {{ m.cost }}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         {% endif %}
 
 

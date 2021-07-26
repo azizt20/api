@@ -15,20 +15,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from booking.views import home, relax, kitchen, booking, room
+
 from booking.models import *
 from booking.serializers import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name="home"),
-    path('booking/', booking, name="booking"),
-    path('room/', room, name="room"),
-    path('kitchen/', kitchen, name="kitchen"),
-    path('relax/', relax, name="relax"),
-    path('api/', include('booking.urls')),
-    path('dashboard/', include('dashboard.urls'))
+    path('', include('booking.urls')),
+
+    # path('', home, name="home"),
+    # path('booking/<slug:slug>/', views.RoomTypeBookingView.as_view(), name='booking'),
+    # path('room/', room, name="room"),
+    # path('kitchen/', kitchen, name="kitchen"),
+    # path('relax/', relax, name="relax"),
+    # path('dashboard/', include('dashboard.urls')),
+    # path('room_type/<slug:slug>/', views.RoomTypeView.as_view(), name='room-name')
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
