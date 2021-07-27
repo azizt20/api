@@ -170,6 +170,8 @@ h3 {
 .wrapper-home {
   background-color: #011014;
   color: #ffffff; }
+  .wrapper-home h1 {
+    font-size: 55px; }
   .wrapper-home .section1 {
     background-image: url("../img/home/head.jpg");
     background-size: cover;
