@@ -985,6 +985,7 @@ h3 {
     }
 
     .slick-next {
+
       background: red;
       z-index: 10000;
       left: 65vw;
@@ -995,6 +996,7 @@ h3 {
       background: rgba(255, 255, 255, 0.3);
 
       &::before {
+
         content: url('../img/relax/arrow.png');
       }
     }
