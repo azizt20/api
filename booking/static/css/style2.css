@@ -165,11 +165,7 @@ h3 {
       font-size: 20px; }
 
 .bg-svet {
-  position: absolute;
-  width: 442.33px;
-  height: 418.31px;
-  border: 1px solid white;
-  transform: rotate(-53.8deg); }
+  position: absolute; }
 
 .wrapper-home {
   background-color: #011014;
@@ -373,6 +369,10 @@ h3 {
       margin: 20px 0 50px; }
       .wrapper-kitchen .section2 .text .bg-svet {
         left: -40%; }
+  .wrapper-kitchen .section3 {
+    margin-top: 250px; }
+    .wrapper-kitchen .section3 h2 {
+      margin-bottom: 30px; }
   .wrapper-kitchen .section4 {
     margin-top: 230px; }
   .wrapper-kitchen .section5 {
@@ -439,6 +439,8 @@ h3 {
 @media (max-width: 767.98px) {
   .wrapper-kitchen .section1 .scroll {
     margin-bottom: 40px; }
+  .wrapper-kitchen .section3 {
+    margin-top: 200px; }
   .wrapper-kitchen .section4 img {
     margin-top: 30px; }
   .wrapper-kitchen .section5 .text {
@@ -464,6 +466,9 @@ h3 {
       display: none; }
   .menu .menu-last .text {
     font-size: 20px; }
+
+  .section3 {
+    margin-top: 100px !important; }
 
   .section4 {
     margin-top: 150px !important; }
@@ -507,7 +512,6 @@ h3 {
       margin-top: 60px; }
   .wrapper-relax .section2 {
     margin-top: 160px;
-    margin-bottom: 560px;
     max-width: 100%; }
     .wrapper-relax .section2 .bg-svet {
       left: 40%;
