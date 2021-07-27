@@ -15,10 +15,11 @@
 </head>
 
 <body>
+    {{ a }}
+
 
 
 <section class="wrapper-booking">
-
 
     <header class="header position-absolute w-100 ">
         <div class="container">
@@ -75,9 +76,10 @@
 
 
     <section class="section1">
+
         <div class="container info">
             <h2>Бронирование номера</h2>
-            <form method="post" action="{% url  'post-booking' %}?slug={{ room.slug }}">
+            <form id="post_p" method="post" action="{% url  'post-booking' %}?slug={{ room.slug }}">
                 {% csrf_token %}
 
                 <div class="row">
@@ -98,13 +100,22 @@
                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Номер
                                             телефона</label>
                                         <div class="col-sm-8">
-                                            <input type="tel" name="phone_number" placeholder="+998 _ _ _ _ _ _ _ _ _" class="form-control"
+                                            <input type="tel" name="phone_number" pattern="+[0-9]{3}[0-9]{3}[0-9]{3}"
+                                                   placeholder="+998 _ _ _ _ _ _ _ _ _"
+                                                   class="form-control"
                                                    id="inputName">
+
+                                            {#                                            <div data-errors-for="phone_number">#}
+                                            {#                                                <small class="form-error"#}
+                                            {#                                                       data-errors-when="patternMismatch">#}
+                                            {#                                                    Please enter a valid phone number.#}
+                                            {#                                                </small>#}
+                                            {#                                            </div>#}
                                             {% if messages %}
-                                            {% for message in messages %}
-                                                <small class="text-danger ">{{ message }}</small>
-                                            {% endfor %}
-                                        {% endif %}
+                                                {% for message in messages %}
+                                                    <small class="text-danger ">{{ message }}</small>
+                                                {% endfor %}
+                                            {% endif %}
                                         </div>
 
                                     </div>
@@ -224,6 +235,10 @@
                                     </div>
                                 </div>
                                 <input type="text" id="picker" class="form-control text-center" name="s&f_date"
+                                        {% if not request.session.st_d == '' and not request.session.an_d == '' %}
+                                       value="{{ request.session.st_d }} - {{ request.session.en_d }}"
+                                        {% endif %}
+
                                         {% if request.GET.sd %}
                                        value="{{ request.GET.sd }} - {{ request.GET.ed }}"
                                         {% endif %} >
@@ -355,12 +370,12 @@
                         Карта сайта
                     </div>
                     <div class="a">
-                        <a href="#appartament">
+                        <a href="{% url 'room-name' room.slug %}">
                             Номера
                         </a>
                     </div>
                     <div class="a">
-                        <a href="#kitchen">
+                        <a href="{% url 'kitchen' %}">
                             Ресторан
                         </a>
                     </div>
@@ -392,13 +407,13 @@
                 <div class="col-lg-5 d-flex flex-column text-lg-right text-center justify-content-lg-end ">
 
                     <div class="d-flex social justify-content-lg-end justify-content-center">
-                        <a href="">
+                        <a target="_blank" href="https://www.facebook.com/heavensgardenuzb/">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="">
+                        <a target="_blank" href="https://t.me/hghotel">
                             <i class="fab fa-telegram-plane"></i>
                         </a>
-                        <a href="">
+                        <a target="_blank" href="https://www.instagram.com/heaven.s_garden/">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>

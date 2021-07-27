@@ -9,13 +9,6 @@ h6 {
   font-family: 'Prosto One', cursive;
 }
 
-h1 {
-  font-size: 55px;
-}
-
-h2 {
-  font-size: 35px;
-}
 
 h3 {
   font-size: 25px;
@@ -36,6 +29,14 @@ h3 {
 // HEADER
 
 .header {
+  h1 {
+    font-size: 55px;
+  }
+
+  h2 {
+    font-size: 35px;
+  }
+
   .nav-link {
     color: #ffffff;
     font-size: 20px;
@@ -46,7 +47,6 @@ h3 {
     }
   }
 }
-
 
 // FOOTER
 
@@ -71,8 +71,8 @@ h3 {
         color: #011014 !important;
 
         &:hover {
-          color: white;
-          background-color: #041216;
+          color: white !important;
+          background-color: #041216 !important;
         }
 
 
@@ -275,14 +275,13 @@ h3 {
 
 
 .bg-svet {
-  //position: absolute;
-  //width: 442.33px;
-  //height: 418.31px;
-  //border: 1px solid white;
-  //// background: rgba(251, 236, 99, 0.26);
-  //// filter: blur(350px);
-  //transform: rotate(-53.8deg);
-  //overflow: hidden !important;
+  position: absolute;
+  width: 442.33px;
+  height: 418.31px;
+  border: 1px solid white;
+  // background: rgba(251, 236, 99, 0.26);
+  // filter: blur(350px);
+  transform: rotate(-53.8deg);
 }
 
 
@@ -293,10 +292,6 @@ h3 {
 
   background-color: #011014;
   color: #ffffff;
-
-  h1 {
-    font-size: 55px;
-  }
 
   .section1 {
     background-image: url("../img/home/head.jpg");
@@ -440,27 +435,37 @@ h3 {
 
 @media (max-width: 991.98px) {
 
-  .wrapper-room .header, .wrapper-booking .header{  
+  .wrapper-room .header, .wrapper-booking .header {
     z-index: 10000;
-      background: #E5E5E5 !important;
+    background: #E5E5E5 !important;
+
     .txt {
       color: black !important;
       margin-top: auto !important;
     }
-    .dropdown{
+
+    .dropdown {
       background: transparent;
     }
 
   }
-  .header {z-index: 10000;
+  .header {
+    z-index: 10000;
     background: #011014 !important;
-    h1{
-      font-size: 47px !important;
+
+    h1 {
+      font-size: 40px !important;
     }
-    .dropdown *{
+
+    h2 {
+      font-size: 30px !important;
+    }
+
+    .dropdown * {
       background: transparent !important;
       border: none;
     }
+
     .collapse {
       height: 90vh;
 
@@ -485,10 +490,10 @@ h3 {
       padding-left: 15px !important;
     }
   }
-  .wrapper-booking , .wrapper-room{
-    .header{
-      .number{
-        a{
+  .wrapper-booking, .wrapper-room {
+    .header {
+      .number {
+        a {
           color: black !important;
         }
       }
@@ -529,7 +534,10 @@ h3 {
   }
 
   h1 {
-    font-size: 47px !important;
+    font-size: 35px !important;
+  }
+  h2 {
+    font-size: 25px;
   }
 
   .wrapper-home {
@@ -951,54 +959,50 @@ h3 {
   }
 
   .section2 {
+
+
     margin-top: 160px;
+    margin-bottom: 560px;
     max-width: 100%;
 
     .bg-svet {
       left: 40%;
       top: -50%;
+      overflow-x: hidden;
       width: 390px !important;
       height: 390px !important;
     }
 
+    .content-slider{max-width: 100% !important;}
     h2 {
       margin-bottom: 46px;
     }
 
-    .mini-slider {
-      overflow: hidden;
-
-      // width: 100%;
-      .slide-img {
-        max-width: 100%;
-
-
-        img {
-          // max-height: 100% !important;
-          // width: auto !important;
-          padding-right: 37px !important;
-          margin-right: 37px !important;
-
-        }
-      }
-
-
+    img {
+      max-height: 442px !important;
+      //width: auto !important;
+      padding:0  35px 0 0 !important;
     }
 
     .slick-next {
       background: red;
       z-index: 10000;
-      right: 20%;
+      left: 65vw;
+      top: 48%;
       width: 65px;
       height: 65px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.3);
 
-
       &::before {
         content: url('../img/relax/arrow.png');
       }
     }
+
+    .slick-prev {
+      display: none !important;
+    }
+
   }
 
   .section3 {
@@ -1050,16 +1054,19 @@ h3 {
 
 @media (max-width: 991.98px) {
   .wrapper-relax {
+    h1 {
+      font-size: 60px;
+    }
+
+    h2 {
+      font-size: 30px !important;
+    }
+
     .section1 {
       padding-top: 150px;
 
       .position-relative {
         padding-top: 100px;
-
-        h1 {
-          font-size: 60px;
-
-        }
       }
 
       .text-head {
@@ -1067,6 +1074,15 @@ h3 {
           display: none;
         }
       }
+    }
+
+    .section2{
+          img {
+      max-height: 300px !important;
+      //width: auto !important;
+      margin-right: 35px !important;
+
+    }
     }
 
     .section4 {
@@ -1080,6 +1096,11 @@ h3 {
 
 @media (max-width: 767.98px) {
   .wrapper-relax {
+
+    .slideres{
+      padding: 0;
+    }
+
     .section1 {
       padding-top: 300px;
 
@@ -1099,6 +1120,14 @@ h3 {
         margin: 30px 0 !important;
       }
     }
+    //    .section2{
+    //      img {
+    //  height: auto !important;
+    //  width: 100% !important;
+    //  margin-right: 35px !important;
+    //
+    //}
+    //}
 
     .section3 {
       img {
@@ -1140,8 +1169,9 @@ h3 {
   .wrapper-relax {
     .section1 {
       h1 {
-        font-size: 50px !important;
+        font-size: 38px !important;
       }
+
 
       .booking {
         padding: 13px 50px !important;

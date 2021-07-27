@@ -18,33 +18,6 @@ for i in range(30):
     qwerty.append((date_now + datetime.timedelta(days=i)).date())
 
 
-def home(request):
-    room_all = RoomType.objects.all()
-    return render(request, 'home.html', {'r_all': room_all})
-
-
-def room(request):
-    return render(request, 'room.html')
-
-
-# def booking(request):
-#     return render(request, 'booking.html')
-
-def relax(request):
-    room_all = RoomType.objects.all()
-    return render(request, 'relax.html', {'r_all': room_all})
-
-
-def kitchen(request):
-    menu = Menu.objects.all()
-    room_all = RoomType.objects.all()
-    return render(request, 'kitchen.html', {'m': menu, 'r_all': room_all})
-
-
-def room(request):
-    room_info = Room_info.objects.all()
-    return render(request, 'room.html', {'r_i': room_info})
-
 
 class RoomTypeList(generics.ListCreateAPIView):
     queryset = RoomType.objects.all()
@@ -76,6 +49,40 @@ class Order1List(generics.ListCreateAPIView):
     serializer_class = Order1ModelSerializer
 
 
+
+
+def home(request):
+    request.session['st_d'] = ''
+    request.session['en_d'] = ''
+    request.session['d'] = ''
+    room_all = RoomType.objects.all()
+    return render(request, 'home.html', {'r_all': room_all})
+
+
+def room(request):
+    return render(request, 'room.html')
+
+
+# def booking(request):
+#     return render(request, 'booking.html')
+
+def relax(request):
+    room_all = RoomType.objects.all()
+    return render(request, 'relax.html', {'r_all': room_all})
+
+
+def kitchen(request):
+    menu = Menu.objects.all()
+    room_all = RoomType.objects.all()
+    return render(request, 'kitchen.html', {'m': menu, 'r_all': room_all})
+
+
+def room(request):
+    room_info = Room_info.objects.all()
+    return render(request, 'room.html', {'r_i': room_info})
+
+
+
 class RoomTypeView(View):
     def get(self, request, slug):
         room = RoomType.objects.get(slug=slug)
@@ -92,6 +99,7 @@ class RoomTypeBookingView(View):
 
 
 def post_booking(request):
+
     if request.method == 'POST':
         room = request.POST.get('room')
         start_date = request.POST.get('start_date')
@@ -106,6 +114,9 @@ def post_booking(request):
             valid_phone = phone_number
         else:
             messages.warning(request, 'введите номер в правельном формате ')
+            request.session['st_d']=request.POST.get("start_date")
+            request.session['en_d']=request.POST.get("finish_date")
+            request.session['d']=request.POST.get("days")
             return redirect('booking', request.GET.get('slug'))
 
         wait = Order_waiting()

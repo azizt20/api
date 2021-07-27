@@ -7,12 +7,6 @@ h5,
 h6 {
   font-family: 'Prosto One', cursive; }
 
-h1 {
-  font-size: 55px; }
-
-h2 {
-  font-size: 35px; }
-
 h3 {
   font-size: 25px; }
 
@@ -23,6 +17,10 @@ h3 {
   .container-lg,
   .container-xl {
     max-width: 1110px; } }
+.header h1 {
+  font-size: 55px; }
+.header h2 {
+  font-size: 35px; }
 .header .nav-link {
   color: #ffffff;
   font-size: 20px;
@@ -47,8 +45,8 @@ h3 {
         background-color: white;
         color: #011014 !important; }
         .footer .row .social a:hover {
-          color: white;
-          background-color: #041216; }
+          color: white !important;
+          background-color: #041216 !important; }
         .footer .row .social a i {
           font-size: 20px !important; }
       .footer .row .social a:not(:first-child) {
@@ -166,11 +164,16 @@ h3 {
       align-items: center;
       font-size: 20px; }
 
+.bg-svet {
+  position: absolute;
+  width: 442.33px;
+  height: 418.31px;
+  border: 1px solid white;
+  transform: rotate(-53.8deg); }
+
 .wrapper-home {
   background-color: #011014;
   color: #ffffff; }
-  .wrapper-home h1 {
-    font-size: 55px; }
   .wrapper-home .section1 {
     background-image: url("../img/home/head.jpg");
     background-size: cover;
@@ -264,7 +267,9 @@ h3 {
     z-index: 10000;
     background: #011014 !important; }
     .header h1 {
-      font-size: 47px !important; }
+      font-size: 40px !important; }
+    .header h2 {
+      font-size: 30px !important; }
     .header .dropdown * {
       background: transparent !important;
       border: none; }
@@ -303,7 +308,10 @@ h3 {
     height: 230px !important; }
 
   h1 {
-    font-size: 47px !important; }
+    font-size: 35px !important; }
+
+  h2 {
+    font-size: 25px; }
 
   .wrapper-home .section1 .row:first-child {
     padding-top: 100px !important; }
@@ -499,31 +507,34 @@ h3 {
       margin-top: 60px; }
   .wrapper-relax .section2 {
     margin-top: 160px;
+    margin-bottom: 560px;
     max-width: 100%; }
     .wrapper-relax .section2 .bg-svet {
       left: 40%;
       top: -50%;
+      overflow-x: hidden;
       width: 390px !important;
       height: 390px !important; }
+    .wrapper-relax .section2 .content-slider {
+      max-width: 100% !important; }
     .wrapper-relax .section2 h2 {
       margin-bottom: 46px; }
-    .wrapper-relax .section2 .mini-slider {
-      overflow: hidden; }
-      .wrapper-relax .section2 .mini-slider .slide-img {
-        max-width: 100%; }
-        .wrapper-relax .section2 .mini-slider .slide-img img {
-          padding-right: 37px !important;
-          margin-right: 37px !important; }
+    .wrapper-relax .section2 img {
+      max-height: 442px !important;
+      padding: 0  35px 0 0 !important; }
     .wrapper-relax .section2 .slick-next {
       background: red;
       z-index: 10000;
-      right: 20%;
+      left: 65vw;
+      top: 48%;
       width: 65px;
       height: 65px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.3); }
       .wrapper-relax .section2 .slick-next::before {
         content: url("../img/relax/arrow.png"); }
+    .wrapper-relax .section2 .slick-prev {
+      display: none !important; }
   .wrapper-relax .section3 {
     margin-top: 160px; }
   .wrapper-relax .section4 {
@@ -547,17 +558,24 @@ h3 {
     margin-top: 240px; }
 
 @media (max-width: 991.98px) {
+  .wrapper-relax h1 {
+    font-size: 60px; }
+  .wrapper-relax h2 {
+    font-size: 30px !important; }
   .wrapper-relax .section1 {
     padding-top: 150px; }
     .wrapper-relax .section1 .position-relative {
       padding-top: 100px; }
-      .wrapper-relax .section1 .position-relative h1 {
-        font-size: 60px; }
     .wrapper-relax .section1 .text-head br {
       display: none; }
+  .wrapper-relax .section2 img {
+    max-height: 300px !important;
+    margin-right: 35px !important; }
   .wrapper-relax .section4 br {
     display: none; } }
 @media (max-width: 767.98px) {
+  .wrapper-relax .slideres {
+    padding: 0; }
   .wrapper-relax .section1 {
     padding-top: 300px; }
     .wrapper-relax .section1 .position-relative {
@@ -582,7 +600,7 @@ h3 {
       margin-top: 30px; } }
 @media (max-width: 575.98px) {
   .wrapper-relax .section1 h1 {
-    font-size: 50px !important; }
+    font-size: 38px !important; }
   .wrapper-relax .section1 .booking {
     padding: 13px 50px !important; }
   .wrapper-relax .section4 {

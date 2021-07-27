@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'css/style2.css' %}">
 </head>
 
-<body>
+<body style="overflow-x: hidden !important;">
 
 <section class="wrapper-relax">
 
@@ -36,7 +37,8 @@
                 </button>
                 <div class=" collapse navbar-collapse justify-content-lg-end justify-content-start" id="navbarNav">
                     <div class=" navbar-nav align-items-center ">
-                                                                    <a class="nav-link active d-none d-lg-block" href="tel:+ 998 (70) 202-01-01">+ 998 (70) 202-01-01</a>
+                        <a class="nav-link active d-none d-lg-block" href="tel:+ 998 (70) 202-01-01">+ 998 (70)
+                            202-01-01</a>
 
                         <div class="dropdown nav-link active">
 
@@ -91,10 +93,11 @@
                             СПА, массаж, дискотеки, закрытый <br> бассейн и многое другое
 
                         </div>
-
-                        <a href="home.html#booking" class="booking btn">
-                            Забронировать номер
-                        </a>
+                        {% with r_all|first as first_one %}
+                            <a href="{% url 'room-name' first_one.slug %}" class="booking btn">
+                                Забронировать номер
+                            </a>
+                        {% endwith %}
                     </div>
                 </div>
                 <div class="col-md-7 text-right">
@@ -104,6 +107,40 @@
         </div>
     </section>
 
+
+    <section class="section2 w-100" style="margin-bottom: 1000px; ">
+        <div class="container ">
+            <h2 class="position-relative">
+                <div class="bg-svet d-none d-lg-block" style="overflow-x: hidden !important;"></div>
+
+                СПА, сауна, <br>
+                турецкий хаммам
+            </h2>
+
+
+            <div class="slideres  position-absolute ">
+                <div class="slick1 slider p-0">
+                    <div class="content-slider">
+                        <img src="{% static 'img/relax/2-1.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                    <div class="content-slider">
+                        <img src="{% static 'img/relax/head.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                    <div class="content-slider">
+                        <img src="{% static 'img/relax/2-1.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                    <div class="content-slider">
+                        <img src="{% static 'img/relax/2-2.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                    <div class="content-slider">
+                        <img src="{% static 'img/relax/2-1.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
 
     <section class="section3">
         <div class="container">
@@ -172,7 +209,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <h2 class="position-relative">
-                        <div class="bg-svet"></div>
+                        <div class="bg-svet" style="overflow-x: hidden"></div>
                         DJ, дискотеки <br>
                         каждый день
                     </h2>
@@ -198,17 +235,20 @@
                     <img src="{% static 'img/logo.svg' %}" class="img-fluid" alt="" srcset="">
                 </div>
 
+
                 <div class="col-lg-2 col-6 px-sm-2 pr-0 ">
                     <div class="span">
                         Карта сайта
                     </div>
                     <div class="a">
-                        <a href="#appartament">
-                            Номера
-                        </a>
+                        {% with r_all|first as first_one %}
+                            <a href="{% url 'room-name' first_one.slug %}">
+                                Номера
+                            </a>
+                        {% endwith %}
                     </div>
                     <div class="a">
-                        <a href="#kitchen">
+                        <a href="{% url 'kitchen' %}">
                             Ресторан
                         </a>
                     </div>
@@ -240,13 +280,13 @@
                 <div class="col-lg-5 d-flex flex-column text-lg-right text-center justify-content-lg-end ">
 
                     <div class="d-flex social justify-content-lg-end justify-content-center">
-                        <a href="">
+                        <a target="_blank" href="https://www.facebook.com/heavensgardenuzb/">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="">
+                        <a target="_blank" href="https://t.me/hghotel">
                             <i class="fab fa-telegram-plane"></i>
                         </a>
-                        <a href="">
+                        <a target="_blank" href="https://www.instagram.com/heaven.s_garden/">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
@@ -260,12 +300,43 @@
 
 
 <script src="{% static 'js/jquary.js' %}"></script>
-<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/slick.min.js' %}"></script>
 <script src="{% static 'js/script.js' %}"></script>
 <script src="https://kit.fontawesome.com/cb3bbb09f5.js" crossorigin="anonymous"></script>
+<script>
 
+    $('.slick1').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        startMode: true,
+        variableWidth: true,
+        {#responsive: [#}
+        {#    {#}
+        {#        breakpoint: 768,#}
+        {#        settings: {#}
+        {#            slidesToShow: 1,#}
+        {#            variableWidth: false,#}
+        {##}
+        {#        }#}
+        {#    },#}
+        {#    {#}
+        {#        breakpoint: 480,#}
+        {#        settings: {#}
+        {#            arrows: false,#}
+        {#            centerMode: true,#}
+        {#            centerPadding: '40px',#}
+        {#            slidesToShow: 1#}
+        {#        }#}
+        {#    }#}
+        {#]#}
+    });
+
+
+</script>
 </body>
 
 </html>

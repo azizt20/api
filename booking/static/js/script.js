@@ -2,7 +2,7 @@ $(document).ready(function () {
     var url = new URL(document.URL);
     var c = url.searchParams.get("days");
     let days = 1;
-    let ah = $('#ahref').data("href")
+    let ah
     if (c) {
         days = c
     }
@@ -14,6 +14,7 @@ $(document).ready(function () {
 
     v = $('.dropdown #1').data("cost")
     h = $('.dropdown #1').data("href")
+    ah = $('#ahref').data("href")
 
 
     $('.wrapper-home .dropdown .btn').html($('.dropdown #1').html())
@@ -26,19 +27,16 @@ $(document).ready(function () {
 
     let updateHref = () => {
         let _h = h;
+        let _ah = ah;
+
         if (sd) {
             _h += `?sd=${sd}&ed=${ed}&days=${days}`;
-        }
-        $('.wrapper-home .done').attr("href", _h)
-    };
-
-    let updateAHref = () => {
-        let _ah = ah;
-        if (sd) {
             _ah += `?sd=${sd}&ed=${ed}&days=${days}`;
         }
+        $('.wrapper-home .done').attr("href", _h)
         $('#ahref').attr("href", _ah)
     };
+
 
 
     $('#picker').daterangepicker({
@@ -56,9 +54,7 @@ $(document).ready(function () {
             $('[name = "start_date"]').val(sd)
             $('[name = "finish_date"]').val(ed)
 
-            updateAHref();
             updateHref();
-            // console.log(typeof parseInt($('.dropdown .dropdown-item').html()))
         }
     );
 
@@ -68,7 +64,6 @@ $(document).ready(function () {
         v = $(this).data("cost");
         h = $(this).data("href");
 
-        updateAHref();
         updateHref();
         $('.wrapper-home .dropdown .btn').html($(this).html())
         $('.total_cost_e').html(parseInt(v) * parseInt(days) + " " + " млн сумов")
@@ -81,52 +76,9 @@ $(document).ready(function () {
     $('[name = "finish_date"]').val(start)
 
     $('[name = "days"]').val(days)
+    // $('#post_p').attr("action", 'asdasdas')
     updateHref();
-    updateAHref();
-    // $('.dropdown .sect').on('click', function () {
-    //     v = $(this).data("cost");
-    //
-    //     $('.total_cost_e').html(v * parseInt(days) + " " + " млн сумов")
-    // })
 
-
-// $(".mini-slider").slick({
-//   dots: true,
-//   infinite: true,
-//   speed: 300,
-//   slidesToShow: 1,
-//   variableWidth: true,
-//   startMode: true,
-//   slidesToScroll: 1,
-//   responsive: [
-//     {
-//       breakpoint: 1024,
-//       settings: {
-//         slidesToShow: 3,
-//         slidesToScroll: 3,
-//         infinite: true,
-//         dots: true,
-//       },
-//     },
-//     {
-//       breakpoint: 600,
-//       settings: {
-//         slidesToShow: 2,
-//         slidesToScroll: 2,
-//       },
-//     },
-//     {
-//       breakpoint: 480,
-//       settings: {
-//         // slidesToShow: 1,
-//         variableWidth: true,
-
-//         slidesToScroll: 1,
-//       },
-//     },
-
-//   ],
-// });
 
 
 });
