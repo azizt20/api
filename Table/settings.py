@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4v%f64v2c2k2ehm#=d5ae4)os=5eyz+a=95&e=$pee)^4j-3sx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['heavensgarden.uz']
+ALLOWED_HOSTS = ['heavensgarden.uz', "127.0.0.1"]
 
 
 # Application definition
@@ -55,6 +55,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Table.urls'
+
+AUTH_USER_MODEL = 'dashboard.User_staff'
 
 TEMPLATES = [
     {
