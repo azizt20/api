@@ -7,9 +7,7 @@ import datetime
 from .forms import LoginForm
 from .models import User_staff
 from booking.forms import BookingForm
-from booking.models import RoomType
-from booking.models import Room
-from booking.models import Order
+from booking.models import RoomType, Order_waiting, Room, Order
 
 
 class Dashboard(View):
@@ -100,13 +98,24 @@ class Edit_order(View):
 
 def order_list(request):
     content = {
-        'orders':Order.objects.order_by('created_at')
+        'orders': Order.objects.order_by('created_at')
     }
     return render(request, 'dashboard/list_orders.html', content)
 
 
-class UserLoginView(View):
+def online_order_list(request):
+    content = {
+        'orders': Order_waiting.objects.order_by('created_at'),
+        'rooms': Room.objects.all()
+    }
+    return render(request, 'dashboard/list_online_orders.html', content)
 
+
+def delete_waiting(request, pk):
+    Order_waiting.objects.get(id=pk).delete()
+    return redirect('online-order_list')
+
+class UserLoginView(View):
     """ User Login """
 
     def get(self, request):
@@ -120,7 +129,8 @@ class UserLoginView(View):
         form = LoginForm(data=request.POST)
         print('shetdan utmebdi')
         if form.is_valid():
-            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'], backend='django.contrib.auth.backends.ModelBackend')
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'],
+                                backend='django.contrib.auth.backends.ModelBackend')
             print('sihlavottiku')
             if user is not None:
                 login(request, user)
@@ -136,7 +146,6 @@ class UserLogoutView(View):
     def get(self, request):
         logout(request)
         return redirect('home')
-
 
 #
 # class DashHome(TemplateView):

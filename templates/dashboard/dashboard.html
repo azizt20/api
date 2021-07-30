@@ -40,7 +40,7 @@
 </head>
 <body class=" w-100">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar container navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Heavns Garden</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll"
             aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,10 +49,13 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'dashboard' %}">Dashboard <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'order_list' %}">Orders List<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'online-order_list' %}">Online orders List<span class="sr-only">(current)</span></a>
             </li>
 
         </ul>
@@ -232,6 +235,10 @@
         {% endfor %}
         </tbody>
     </table>
+{% if request.user.is_superuser %}
+<a class="ml-2 btn btn-primary" href="/admin/booking/room/add/">Add room</a>
+<a class="ml-2 btn btn-primary" href="/admin/dashboard/user_staff/add/">Add staff</a>
+{% endif %}
 
 </div>
 {#</div>#}
