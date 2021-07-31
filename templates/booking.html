@@ -97,7 +97,7 @@
                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Номер
                                             телефона</label>
                                         <div class="col-sm-8">
-                                            <input type="tel" name="phone_number" pattern="+[0-9]{3}[0-9]{3}[0-9]{3}"
+                                            <input type="tel" name="phone_number"
                                                    placeholder="+998 _ _ _ _ _ _ _ _ _"
                                                    class="form-control"
                                                    id="inputName">
@@ -192,8 +192,8 @@
                     <div class="col-lg-5 ">
                         <input type="hidden" name="room" value="{{ room.type }}">
                         <input type="hidden" name="start_date" value="{{ request.GET.sd }}">
-                        <input type="hidden" name="finish_date" value="{{ request.GET.sd }}">
-                        <input type="hidden" name="order_cost" value="{{ room.cost_day }}">
+                        <input type="hidden" name="finish_date" value="{{ request.GET.ed }}">
+                        <input type="hidden" name="order_cost" value="{{ room.cost_day  }}">
                         <input type="hidden" name="days">
                         {#                        <input type="hidden" name="finish_date" value="{{ request.GET.ed }}">#}
 

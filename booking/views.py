@@ -108,7 +108,7 @@ def post_booking(request):
         user_name = request.POST.get('user_name')
         phone_number = request.POST.get('phone_number')
         email = request.POST.get('email')
-        pay = request.POST.get('email')
+        pay = request.POST.get('pay')
         valid_phone = None
         if phone_number.startswith('+') and phone_number[1:].isdigit():
             valid_phone = phone_number
