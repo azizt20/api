@@ -1,3 +1,4 @@
+{% load my_filter %}
 {% load static tags %}
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +40,7 @@
 </head>
 <body class=" w-100">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar container navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Heavns Garden</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll"
             aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,17 +49,28 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'dashboard' %}">Dashboard <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'order_list' %}">Orders List<span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'online-order_list' %}">Online orders List<span class="sr-only">(current)</span></a>
+            </li>
 
         </ul>
-        {#        <form class="d-flex">#}
-        {#            <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">#}
-        {#            <button class="btn btn-outline-success" type="submit">Search</button>#}
-        {#        </form>#}
+        <div class="d-flex">
+
+            <a class="btn btn-outline-danger" href="{% url 'logout' %}" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                    <path fill-rule="evenodd"
+                          d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                </svg>
+            </a>
+        </div>
     </div>
 </nav>
 
@@ -92,71 +104,141 @@
         <tbody class="">
 
         {% for typr in types %}
-            <tr class="" style="background-color: #525c66">
-                <th scope="row">{{ typr }}</th>
-                <th scope="col" colspan="30"></th>
-            </tr>
-            {% for room in rooms %}
-                {% if room.room_type == typr %}
-                    <tr>
-                        <th scope="row" class="small">{{ room.slug }}</th>
-                        {% for days in month %}
-                            {% build_key room days as key %}
-                            {% if key not in skip %}
-                                {% if key in data %}
-                                    {% get_item data key as found %}
-                                    <th scope="col" colspan="{{ found.diff_days }}"
-                                        data-id="{{ found.id }}"
-                                        data-room="{{ found.room.slug }}"
-                                        data-slug="{{ found.slug }}"
-                                        data-sday="{{ found.start_date.day }}"
-                                        data-smonth="{{ found.start_date.month }}"
-                                        data-syear="{{ found.start_date.year }}"
-                                        data-fday="{{ found.finish_date.day }}"
-                                        data-fmonth="{{ found.finish_date.month }}"
-                                        data-fyear="{{ found.finish_date.year }}"
-                                        data-price="{{ found.order_cost }}"
-                                        data-name="{{ found.user_name }}"
-                                        data-phone="{{ found.phone_number }}"
-                                        data-email="{{ found.email }}"
-                                        class="{% if found.finish_date <= current_Date %}
+            {% if request.user|has_group:"Hotel" and not typr.is_villa or request.user.is_superuser %}
+                <tr class="" style="background-color: #525c66">
+                    <th scope="row">{{ typr }}</th>
+                    <th scope="col" colspan="30"></th>
+                </tr>
+                {% for room in rooms %}
+                    {% if room.room_type == typr %}
+                        <tr>
+                            <th scope="row" class="small">{{ room.slug }}</th>
+                            {% for days in month %}
+                                {% build_key room days as key %}
+                                {% if key not in skip %}
+                                    {% if key in data %}
+                                        {% get_item data key as found %}
+                                        <th scope="col" colspan="{{ found.diff_days }}"
+                                            data-id="{{ found.id }}"
+                                            data-room="{{ found.room.slug }}"
+                                            data-slug="{{ found.slug }}"
+                                            data-sday="{{ found.start_date.day }}"
+                                            data-smonth="{{ found.start_date.month }}"
+                                            data-syear="{{ found.start_date.year }}"
+                                            data-fday="{{ found.finish_date.day }}"
+                                            data-fmonth="{{ found.finish_date.month }}"
+                                            data-fyear="{{ found.finish_date.year }}"
+                                            data-price="{{ found.order_cost }}"
+                                            data-name="{{ found.user_name }}"
+                                            data-phone="{{ found.phone_number }}"
+                                            data-email="{{ found.email }}"
+                                            class="{% if found.finish_date <= current_Date %}
                                         bg-secondary
                                         {% else %}
                                         ordered
                                         {% endif %}
                                             ali"><a type="button"
-                                            {% if found.finish_date <= current_Date %}
-                                            {% else %}
-                                                data-toggle="modal" data-target="#exampleModal2"
-                                            {% endif %}
-                                                tabindex="0" data-toggle="tooltip"
-                                                title="Name {{ found.user_name }},
+                                                {% if found.finish_date <= current_Date %}
+                                                {% else %}
+                                                    data-toggle="modal" data-target="#exampleModal2"
+                                                {% endif %}
+                                                    tabindex="0" data-toggle="tooltip"
+                                                    title="Name {{ found.user_name }},
                                                 start date  {{ found.start_date }},
                                                 finish date {{ found.finish_date }},
                                                 phone {{ found.phone_number }},
                                                 PRICE {{ found.order_cost }}">{{ found.user_name }}</a>
-                                    </th>
-                                {% else %}
-                                    <th data-day="{{ days.day }}"
-                                        data-month="{{ days.month }}"
-                                        data-year="{{ days.year }}"
-                                        data-room="{{ room.slug }}"
-                                        data-cost="{{ room.cost_per_day }}"
-                                        data-toggle="modal"
-                                        data-target="#exampleModal"
-                                        scope="col" colspan="" class="
+                                        </th>
+                                    {% else %}
+                                        <th data-day="{{ days.day }}"
+                                            data-month="{{ days.month }}"
+                                            data-year="{{ days.year }}"
+                                            data-room="{{ room.slug }}"
+                                            data-cost="{{ room.cost_per_day }}"
+                                            data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            scope="col" colspan="" class="
                                         {% if days.weekday == 5 or days.weekday == 6 %}
                                             restDay
                                         {% else %}thhover{% endif %} aziz"></th>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    </tr>
-                {% endif %}
-            {% endfor %}
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% elif request.user|has_group:"Villa" and typr.is_villa or request.user.is_superuser %}
+                <tr class="" style="background-color: #525c66">
+                    <th scope="row">{{ typr }}</th>
+                    <th scope="col" colspan="30"></th>
+                </tr>
+                {% for room in rooms %}
+                    {% if room.room_type == typr %}
+                        <tr>
+                            <th scope="row" class="small">{{ room.slug }}</th>
+                            {% for days in month %}
+                                {% build_key room days as key %}
+                                {% if key not in skip %}
+                                    {% if key in data %}
+                                        {% get_item data key as found %}
+                                        <th scope="col" colspan="{{ found.diff_days }}"
+                                            data-id="{{ found.id }}"
+                                            data-room="{{ found.room.slug }}"
+                                            data-slug="{{ found.slug }}"
+                                            data-sday="{{ found.start_date.day }}"
+                                            data-smonth="{{ found.start_date.month }}"
+                                            data-syear="{{ found.start_date.year }}"
+                                            data-fday="{{ found.finish_date.day }}"
+                                            data-fmonth="{{ found.finish_date.month }}"
+                                            data-fyear="{{ found.finish_date.year }}"
+                                            data-price="{{ found.order_cost }}"
+                                            data-name="{{ found.user_name }}"
+                                            data-phone="{{ found.phone_number }}"
+                                            data-email="{{ found.email }}"
+                                            class="{% if found.finish_date <= current_Date %}
+                                        bg-secondary
+                                        {% else %}
+                                        ordered
+                                        {% endif %}
+                                            ali"><a type="button"
+                                                {% if found.finish_date <= current_Date %}
+                                                {% else %}
+                                                    data-toggle="modal" data-target="#exampleModal2"
+                                                {% endif %}
+                                                    tabindex="0" data-toggle="tooltip"
+                                                    title="Name {{ found.user_name }},
+                                                start date  {{ found.start_date }},
+                                                finish date {{ found.finish_date }},
+                                                phone {{ found.phone_number }},
+                                                PRICE {{ found.order_cost }}">{{ found.user_name }}</a>
+                                        </th>
+                                    {% else %}
+                                        <th data-day="{{ days.day }}"
+                                            data-month="{{ days.month }}"
+                                            data-year="{{ days.year }}"
+                                            data-room="{{ room.slug }}"
+                                            data-cost="{{ room.cost_per_day }}"
+                                            data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            scope="col" colspan="" class="
+                                        {% if days.weekday == 5 or days.weekday == 6 %}
+                                            restDay
+                                        {% else %}thhover{% endif %} aziz"></th>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
         {% endfor %}
         </tbody>
     </table>
+{% if request.user.is_superuser %}
+<a class="ml-2 btn btn-primary" href="/admin/booking/room/add/">Add room</a>
+<a class="ml-2 btn btn-primary" href="/admin/dashboard/user_staff/add/">Add staff</a>
+{% endif %}
 
 </div>
 {#</div>#}
@@ -183,7 +265,11 @@
                                 <label for="exampleFormControlSelect1">Room</label>
                                 <select name="room" class="form-control roomme" id="exampleFormControlSelect1">
                                     {% for room in rooms %}
-                                        <option>{{ room.slug }}</option>
+                                        {% if request.user|has_group:"Hotel" and not room.room_type.is_villa or request.user.is_superuser %}
+                                            <option>{{ room.slug }}</option>
+                                        {% elif request.user|has_group:"Villa" and room.room_type.is_villa or request.user.is_superuser %}
+                                            <option>{{ room.slug }}</option>
+                                        {% endif %}
                                     {% endfor %}
                                 </select>
                             </div>
@@ -263,8 +349,14 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Room</label>
                                 <select name="room" class="form-control roomme" id="exampleFormControlSelect1">
+
                                     {% for room in rooms %}
-                                        <option>{{ room.slug }}</option>
+                                        {% if request.user|has_group:"Hotel" and not room.room_type.is_villa or request.user.is_superuser %}
+                                            <option>{{ room.slug }}</option>
+                                        {% elif request.user|has_group:"Villa" and room.room_type.is_villa or request.user.is_superuser %}
+                                            <option>{{ room.slug }}</option>
+                                        {% endif %}
+
                                     {% endfor %}
                                 </select>
                             </div>

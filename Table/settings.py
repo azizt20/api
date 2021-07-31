@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,6 +56,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Table.urls'
+
+AUTH_USER_MODEL = 'dashboard.User_staff'
 
 TEMPLATES = [
     {

@@ -1,7 +1,7 @@
 import datetime
 
 from django.db import models
-from  django.urls import  reverse_lazy
+from django.urls import reverse_lazy
 
 
 # Create your models here.
@@ -13,12 +13,13 @@ class RoomType(models.Model):
     photo1 = models.ImageField(upload_to='avatars/', null=True, blank=True)
     photo2 = models.ImageField(upload_to='avatars/', null=True, blank=True)
     photo3 = models.ImageField(upload_to='avatars/', null=True, blank=True)
-    cost_day = models.IntegerField( null=True, blank=True)
+    cost_day = models.IntegerField(null=True, blank=True)
+    is_villa = models.BooleanField(default=False)
 
     slug = models.SlugField()
 
     def get_absolute_url(self):
-        return reverse_lazy('room-name', kwargs={'slug':self.slug})
+        return reverse_lazy('room-name', kwargs={'slug': self.slug})
 
     def __str__(self):
         return f'{self.type}'
@@ -31,6 +32,7 @@ class Room_info(models.Model):
 
     def __str__(self):
         return f'{self.room_type}'
+
 
 class Room_photo(models.Model):
     room_info = models.ForeignKey(Room_info, on_delete=models.CASCADE)
@@ -78,7 +80,6 @@ class Order(models.Model):
         return f'{self.id} '
 
 
-
 class Order_waiting(models.Model):
     room = models.CharField(max_length=200, blank=True)
     start_date = models.CharField(max_length=200, blank=True)
@@ -88,6 +89,10 @@ class Order_waiting(models.Model):
     user_name = models.CharField(max_length=50, blank=True)
     phone_number = models.CharField(max_length=14, blank=True)
     email = models.CharField(max_length=200, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.user_name}'
 
 
 class Menu(models.Model):

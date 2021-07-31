@@ -72,8 +72,8 @@ $(document).ready(function () {
 
 
     })
-    $('[name = "start_date"]').val(sd)
-    $('[name = "finish_date"]').val(start)
+    $('[name = "start_date"]').val(sd.format('MM-DD-YYYY'))
+    $('[name = "finish_date"]').val(ed.format('MM-DD-YYYY'))
 
     $('[name = "days"]').val(days)
     // $('#post_p').attr("action", 'asdasdas')
