@@ -84,11 +84,11 @@ class Order_waiting(models.Model):
     room = models.CharField(max_length=200, blank=True)
     start_date = models.CharField(max_length=200, blank=True)
     finish_date = models.CharField(max_length=200, blank=True)
-    order_cost = models.IntegerField()
+    order_cost = models.IntegerField(null=True, blank=True)
     pay = models.CharField(max_length=200, blank=True)
     user_name = models.CharField(max_length=50, blank=True)
     phone_number = models.CharField(max_length=14, blank=True)
-    email = models.CharField(max_length=200, blank=True)
+    email = models.CharField(max_length=200, blank=True, null=True, default='')
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
