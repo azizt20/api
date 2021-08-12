@@ -1,342 +1,188 @@
+{% extends './layouts/base.html' %}
 {% load static %}
 {% load i18n %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}
     <title>Relax</title>
-    <link rel="icon" sizes=" " type="image/png" href="{% static '' %}img/logo.svg">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+{% endblock title %}
+{% block css %}
     <link rel="stylesheet" href="{% static 'css/slick-theme.css' %}">
     <link rel="stylesheet" href="{% static 'css/slick.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
-</head>
-
-<body>
-
-<section class="wrapper-relax">
+{% endblock %}
 
 
-    <header class="header position-absolute w-100 ">
-        <div class="bg-svet"></div>
 
-        <div class="container">
-            <nav class="navbar navbar-expand-lg px-3 px-md-0">
+{% block wrapper %}wrapper-relax{% endblock wrapper %}
 
-                <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/logo.svg' %}" class="img-fluid"
-                                                                     alt=""
-                                                                     srcset=""></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <img src="{% static 'img/gam.png' %}" alt="">
 
-                </button>
-                <div class=" collapse navbar-collapse justify-content-lg-end justify-content-start" id="navbarNav">
-                    <div class=" navbar-nav align-items-center ">
-                        <a class="nav-link active d-none d-lg-block" href="tel:+ 998 (70) 202-01-01">+ 998 (70)
-                            202-01-01</a>
+{% block content %}
 
-                        <div class="dropdown nav-link active">
 
-                            <button class=" border-0 text-white" type="button" id="dropdownMenuButton"
-                                    style="background: transparent"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Номера
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                                {% for room_info in r_all %}
-
-                                    <a class="dropdown-item "
-                                       href="{{ room_info.get_absolute_url }}"
-                                       data-cost="{{ room_info.cost_day }}">
-                                        {{ room_info.type }}
-                                    </a>
-
-                                {% endfor %}
+        <section class="section1 " style="padding-top: 218px !important"    >
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 d-flex flex-column justify-content-center">
+                        <div class="content">
+                            <div class="position-relative">
+                                <h1 class="title position-absolute">
+                                    Отдохнуть <br>
+                                    и расслабиться
+                                </h1>
+                            </div>
+                            <div class="text-head ">
+                                СПА, массаж, дискотеки, закрытый <br> бассейн и многое другое
 
                             </div>
-                        </div>
-                        <a class="nav-link active" href="{% url 'kitchen' %}">Ресторан</a>
-                        <a class="nav-link active" href="{% url 'relax' %}">Отдых</a>
-                      
-                        <div class="nav-link d-flex flex-column d-lg-none  number mt-auto text-center">
-                            <div class="txt">Номер для брони:</div>
-                            <a href="tel:+ 998 (70) 202-01-01">+ 998 (70) 202-01-01</a>
+                            {% with r_all|first as first_one %}
+                                <a href="{% url 'room-name' first_one.slug %}" class="booking btn">
+                                    Забронировать номер
+                                </a>
+                            {% endwith %}
                         </div>
                     </div>
+                    <div class="col-md-7 text-right">
+                        <img src="{% static 'img/relax/head.jpg' %}" class="img-fluid " alt="">
+                    </div>
                 </div>
-            </nav>
-        </div>
-
-    </header>
+            </div>
+        </section>
 
 
-    <section class="section1 ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 d-flex flex-column justify-content-center">
-                    <div class="content">
-                        <div class="position-relative">
-                            <h1 class="title position-absolute">
-                                Отдохнуть <br>
-                                и расслабиться
-                            </h1>
+        <section class="section2 w-100">
+            <div class="container ">
+                <h2 class="position-relative">
+                    <div class="bg-svet d-none d-lg-block" style="overflow-x: hidden !important;"></div>
+
+                    СПА, сауна, <br>
+                    турецкий хаммам
+                </h2>
+            </div>
+
+            <div class="slideres" style="margin-left: 15%">
+                <div class="slick1 slider p-0">
+                    <div class="content-slider">
+                        <img src="{% static 'img/relax/4444.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                    <div class="content-slider">
+                        <img src="{% static 'img/relax/head.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                    <div class="content-slider">
+                        <img src="{% static 'img/relax/4444.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                    <div class="content-slider">
+                        <img src="{% static 'img/relax/4444.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                    <div class="content-slider">
+                        <img src="{% static 'img/relax/4444.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <section class="section3">
+            <div class="container">
+                <div class="row row-cols-md-2 row-cols-1">
+                    <div class="col d-flex flex-column justify-content-between">
+                        <h2 class="text">
+                            Солевая пещера <br>
+                            и зимний бассейн
+                        </h2>
+                        <img src="{% static 'img/relax/3-1.jpg' %}" alt="" class="img-fluid ">
+
+                    </div>
+                    <div class="col">
+                        <img src="{% static 'img/relax/3-2.jpg' %}" alt="" class="img-fluid ">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <img src="{% static 'img/relax/massaj.jpg' %}" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-md-4 d-flex flex-column justify-content-end">
+                        <h2>
+                            4 вида массажа <br>
+                            от <br class="d-none"> настояшего <br>
+                            физиотерапевта
+                        </h2>
+                        <div>
+                            Классический, спортивный, <br> баночный и медовый массаж
                         </div>
-                        <div class="text-head ">
-                            СПА, массаж, дискотеки, закрытый <br> бассейн и многое другое
+                    </div>
+                </div>
+            </div>
 
+        </section>
+
+
+        <section class="section5">
+            <div class="container">
+                <h2>
+                    Детские площадки <br>
+                    и аниматоры по выходным
+                </h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{% static 'img/relax/5-1.jpg' %}" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{% static 'img/relax/5-2.jpg' %}" alt="" class="img-fluid">
+                    </div>
+                    <div class="col">
+                        <img src="{% static 'img/relax/5-3.jpg' %}" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section6">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2 class="position-relative">
+                            <div class="bg-svet" style="overflow-x: hidden"></div>
+                            DJ, дискотеки <br>
+                            каждый день
+                        </h2>
+                        <div>
+                            Самые последние хиты и <br>
+                            авторские сеты от талантливых диджеев
                         </div>
-                        {% with r_all|first as first_one %}
-                            <a href="{% url 'room-name' first_one.slug %}" class="booking btn">
-                                Забронировать номер
-                            </a>
-                        {% endwith %}
                     </div>
-                </div>
-                <div class="col-md-7 text-right">
-                    <img src="{% static 'img/relax/head.jpg' %}" class="img-fluid " alt="">
-                </div>
-            </div>
-        </div>
-    </section>
+                    <div class="col-md-8">
+                        <img src="{% static 'img/relax/6.jpg' %}" alt="" class="img-fluid">
 
-
-    <section class="section2 w-100" >
-        <div class="container ">
-            <h2 class="position-relative">
-                <div class="bg-svet d-none d-lg-block" style="overflow-x: hidden !important;"></div>
-
-                СПА, сауна, <br>
-                турецкий хаммам
-            </h2>
-        </div>
-
-        <div class="slideres" style="margin-left: 15%">
-        <div class="slick1 slider p-0">
-            <div class="content-slider">
-                <img  src="{% static 'img/relax/2-1.jpg' %}" class="img-fluid" alt="">
-            </div>
-            <div class="content-slider">
-                <img src="{% static 'img/relax/head.jpg' %}" class="img-fluid" alt="">
-            </div>
-            <div class="content-slider">
-                <img src="{% static 'img/relax/2-1.jpg' %}" class="img-fluid" alt="">
-            </div>
-            <div class="content-slider">
-                <img src="{% static 'img/relax/2-2.jpg' %}" class="img-fluid" alt="">
-            </div>
-            <div class="content-slider">
-                <img src="{% static 'img/relax/2-1.jpg' %}" class="img-fluid" alt="">
-            </div>
-        </div>
-    </div>
-
-    </section>
-
-
-
-
-
-    <section class="section3">
-        <div class="container">
-            <div class="row row-cols-md-2 row-cols-1">
-                <div class="col d-flex flex-column justify-content-between">
-                    <h2 class="text">
-                        Солевая пещера <br>
-                        и зимний бассейн
-                    </h2>
-                    <img src="{% static 'img/relax/3-1.jpg' %}" alt="" class="img-fluid ">
-
-                </div>
-                <div class="col">
-                    <img src="{% static 'img/relax/3-2.jpg' %}" alt="" class="img-fluid ">
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="section4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <img src="{% static 'img/relax/massaj.jpg' %}" alt="" class="img-fluid">
-                </div>
-                <div class="col-md-4 d-flex flex-column justify-content-end">
-                    <h2>
-                        4 вида массажа <br>
-                        от <br class="d-none"> настояшего <br>
-                        физиотерапевта
-                    </h2>
-                    <div>
-                        Классический, спортивный, <br> баночный и медовый массаж
                     </div>
                 </div>
             </div>
-        </div>
-
-    </section>
+        </section>
 
 
-    <section class="section5">
-        <div class="container">
-            <h2>
-                Детские площадки <br>
-                и аниматоры по выходным
-            </h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="{% static 'img/relax/5-1.jpg' %}" alt="" class="img-fluid">
-                </div>
-                <div class="col-md-6">
-                    <img src="{% static 'img/relax/5-2.jpg' %}" alt="" class="img-fluid">
-                </div>
-                <div class="col">
-                    <img src="{% static 'img/relax/5-3.jpg' %}" alt="" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </section>
+{% endblock content %}
+
+{% block js %}
+
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script>
+
+        $('.slick1').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            startMode: true,
+            variableWidth: true,
+        });
 
 
-    <section class="section6">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h2 class="position-relative">
-                        <div class="bg-svet" style="overflow-x: hidden"></div>
-                        DJ, дискотеки <br>
-                        каждый день
-                    </h2>
-                    <div>
-                        Самые последние хиты и <br>
-                        авторские сеты от талантливых диджеев
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <img src="{% static 'img/relax/6.jpg' %}" alt="" class="img-fluid">
+    </script>
 
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-2">
-                    <img src="{% static 'img/logo.svg' %}" class="img-fluid" alt="" srcset="">
-                </div>
-
-
-                <div class="col-lg-2 col-6 px-sm-2 pr-0 ">
-                    <div class="span">
-                        Карта сайта
-                    </div>
-                    <div class="a">
-                        {% with r_all|first as first_one %}
-                            <a href="{% url 'room-name' first_one.slug %}">
-                                Номера
-                            </a>
-                        {% endwith %}
-                    </div>
-                    <div class="a">
-                        <a href="{% url 'kitchen' %}">
-                            Ресторан
-                        </a>
-                    </div>
-                    <div class="a">
-                        <a href="">
-                            Отдых
-                        </a>
-                    </div>
-                </div>
-                <br>
-                <br>
-
-                <div class="col-lg-3 col-6 px-sm-2 p-0 footer_100">
-                    <div class="span">
-                        Контакты
-                    </div>
-                    <div class="a">
-                        <a href="tel: + 998 (70) 202-01-01">
-                            + 998 (70) 202-01-01
-                        </a>
-                    </div>
-                    <div class="a">
-                        <a href="mailto: heavensg@gmail.com">
-                            heavensg@gmail.com
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-5 d-flex flex-column text-lg-right text-center justify-content-lg-end ">
-
-                    <div class="d-flex social justify-content-lg-end justify-content-center">
-                        <a target="_blank" href="https://www.facebook.com/heavensgardenuzb/">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a target="_blank" href="https://t.me/hghotel">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                        <a target="_blank" href="https://www.instagram.com/heaven.s_garden/">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                    <div>OOO “HEAVEN’S GARDEN” 2019</div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-</section>
-
-
-<script src="{% static 'js/jquary.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/slick.min.js' %}"></script>
-<script src="{% static 'js/script.js' %}"></script>
-<script src="https://kit.fontawesome.com/cb3bbb09f5.js" crossorigin="anonymous"></script>
-<script>
-
-    $('.slick1').slick({
-        dots: true,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 1,
-        startMode: true,
-        variableWidth: true,
-        {#responsive: [#}
-        {#    {#}
-        {#        breakpoint: 768,#}
-        {#        settings: {#}
-        {#            slidesToShow: 1,#}
-        {#            variableWidth: false,#}
-        {##}
-        {#        }#}
-        {#    },#}
-        {#    {#}
-        {#        breakpoint: 480,#}
-        {#        settings: {#}
-        {#            arrows: false,#}
-        {#            centerMode: true,#}
-        {#            centerPadding: '40px',#}
-        {#            slidesToShow: 1#}
-        {#        }#}
-        {#    }#}
-        {#]#}
-    });
-
-
-</script>
-</body>
-
-</html>
+{% endblock %}

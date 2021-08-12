@@ -29,6 +29,7 @@ h3 {
 // HEADER
 
 .header {
+
   h1 {
     font-size: 55px;
   }
@@ -437,6 +438,17 @@ h3 {
 
 
 @media (max-width: 991.98px) {
+  .header{
+    background: transparent !important;
+    padding: 0 !important;
+    .navbar{
+      background: transparent !important;
+      border: none !important ;
+      padding: 13px !important;
+      margin: 0px !important  ;
+
+    }
+  }
 
   .wrapper-room .header, .wrapper-booking .header {
     z-index: 10000;
@@ -470,7 +482,6 @@ h3 {
     }
 
     .collapse {
-      height: 90vh;
 
       .number {
         margin-bottom: 60px !important;
@@ -867,6 +878,10 @@ h3 {
 }
 
 @media (max-width: 575.98px) {
+
+  .slideres{
+    margin-left: 5% !important;
+  }
   .menu {
     .item {
       font-size: 15px !important;

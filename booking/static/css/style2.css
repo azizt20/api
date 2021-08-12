@@ -252,6 +252,15 @@ h3 {
         margin-bottom: 34px; }
 
 @media (max-width: 991.98px) {
+  .header {
+    background: transparent !important;
+    padding: 0 !important; }
+    .header .navbar {
+      background: transparent !important;
+      border: none !important;
+      padding: 13px !important;
+      margin: 0px !important; }
+
   .wrapper-room .header, .wrapper-booking .header {
     z-index: 10000;
     background: #E5E5E5 !important; }
@@ -271,17 +280,15 @@ h3 {
     .header .dropdown * {
       background: transparent !important;
       border: none; }
-    .header .collapse {
-      height: 90vh; }
-      .header .collapse .number {
-        margin-bottom: 60px !important; }
-        .header .collapse .number .txt {
-          color: rgba(255, 255, 255, 0.44);
-          font-size: 15px; }
-        .header .collapse .number a {
-          text-decoration: none;
-          font-size: 18px;
-          color: #FFFFFF; }
+    .header .collapse .number {
+      margin-bottom: 60px !important; }
+      .header .collapse .number .txt {
+        color: rgba(255, 255, 255, 0.44);
+        font-size: 15px; }
+      .header .collapse .number a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #FFFFFF; }
     .header .nav-link {
       margin-top: 22px;
       padding-left: 15px !important; }
@@ -456,6 +463,9 @@ h3 {
   .wrapper-kitchen .menu .line {
     display: none; } }
 @media (max-width: 575.98px) {
+  .slideres {
+    margin-left: 5% !important; }
+
   .menu .item {
     font-size: 15px !important; }
     .menu .item .cost div {
