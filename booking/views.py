@@ -104,6 +104,7 @@ def post_booking(request):
         room = request.POST.get('room')
         start_date = request.POST.get('start_date')
         finish_date = request.POST.get('finish_date')
+
         order_cost = request.POST.get('order_cost')
         user_name = request.POST.get('user_name')
         phone_number = request.POST.get('phone_number')
