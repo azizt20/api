@@ -86,8 +86,26 @@ def room(request):
 class RoomTypeView(View):
     def get(self, request, slug):
         room = RoomType.objects.get(slug=slug)
+        rooms = RoomType.objects.all()
         room_all = RoomType.objects.all()
-        return render(request, 'room_type.html', {'room': room, 'r_all': room_all})
+        datafaziz = {'room': room, 'r_all': room_all}
+        for i in rooms:
+            xonalar = Order.objects.filter(room__room_type=i)
+            print(xonalar)
+            busydays = []
+            for x in xonalar:
+                sd = x.start_date
+                fd = x.finish_date
+                day = fd - sd
+
+                for single_date in (sd + datetime.timedelta(n) for n in range(int(day.days))):
+                    busydays.append(single_date)
+            datafaziz[i.type] = busydays
+            busydays = []
+
+
+        print(datafaziz)
+        return render(request, 'room_type.html', datafaziz)
 
 
 class RoomTypeBookingView(View):
