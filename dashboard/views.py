@@ -104,8 +104,16 @@ def order_list(request):
 
 
 def online_order_list(request):
+    if request.method == 'POST':
+        name = request.POST['names']
+        print('salom')
+        content = {
+            'orders': Order_waiting.objects.filter(user_name__contains=name),
+            'rooms': Room.objects.all()
+        }
+        return render(request, 'dashboard/list_online_orders.html', content)
     content = {
-        'orders': Order_waiting.objects.order_by('created_at'),
+        'orders': Order_waiting.objects.all().order_by('-created_at'),
         'rooms': Room.objects.all()
     }
     return render(request, 'dashboard/list_online_orders.html', content)
