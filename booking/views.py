@@ -91,7 +91,7 @@ class RoomTypeView(View):
         datafaziz = {'room': room, 'r_all': room_all}
         for i in rooms:
             xonalar = Order.objects.filter(room__room_type=i)
-            print(xonalar)
+
             busydays = []
             for x in xonalar:
                 sd = x.start_date
