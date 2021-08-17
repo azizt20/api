@@ -115,15 +115,7 @@
                                 </div>
                                 <sapn>У нас действует 100% предоплата любым удобным для вас способом</sapn>
                             </div>
-                            <div class="paragraph d-flex">
-                                <div>
-                                    <img src="{% static 'img/room/v.png' %}" alt="" class="">
-                                </div>
-                                <sapn>При отмене брони за двое суток (48 часов), мы вернем вам полную стоимость,
-                                    позже – 50% от всей суммы. В случае отмены брони в день приезда, предоплата не
-                                    возвращается.
-                                </sapn>
-                            </div>
+
                             <div class="paragraph d-flex">
                                 <div>
                                     <img src="{% static 'img/room/v.png' %}" alt="" class="">
@@ -204,6 +196,12 @@
 {% endblock content %}
 
 {% block js %}
+    <script>
+        var qwqw = []
+        {% for i in busy %}
+            qwqw.push('{{ i.year }}-{{ i.month }}-{{i.day}}')
+        {% endfor %}
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="{% static 'js/moment.min.js' %}"></script>
     <script src="{% static 'js/daterangepicker.js' %}"></script>

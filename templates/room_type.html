@@ -106,15 +106,7 @@
                             </div>
                             <sapn>У нас действует 100% предоплата любым удобным для вас способом</sapn>
                         </div>
-                        <div class="paragraph d-flex">
-                            <div>
-                                <img src="{% static 'img/room/v.png' %}" alt="" class="">
-                            </div>
-                            <sapn>При отмене брони за двое суток (48 часов), мы вернем вам полную стоимость,
-                                позже – 50% от всей суммы. В случае отмены брони в день приезда, предоплата не
-                                возвращается.
-                            </sapn>
-                        </div>
+
                         <div class="paragraph d-flex">
                             <div>
                                 <img src="{% static 'img/room/v.png' %}" alt="" class="">
@@ -189,7 +181,7 @@
                 {% for all in r_all %}
                     <div class="col room pb-4">
                         <div class="card">
-                            <div id="carouselExampleControls3" class="carousel slide w-100" data-ride="carousel">
+                            <div id="carouselExampleControls3{{ all.slug }}" class="carousel slide w-100" data-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img src="{{ all.photo1.url }}" class="d-block w-100" alt="...">
@@ -201,12 +193,12 @@
                                         <img src="{{ all.photo3.url }}" class="d-block w-100" alt="...">
                                     </div>
                                 </div>
-                                <a class="carousel-control-prev" href="#carouselExampleControls3" role="button"
+                                <a class="carousel-control-prev" href="#carouselExampleControls3{{ all.slug }}" role="button"
                                    data-slide="prev">
                                     <span aria-hidden="true"><img src="{% static 'img/room/prev.png' %}" alt=""></span>
                                     <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="carousel-control-next" href="#carouselExampleControls3" role="button"
+                                <a class="carousel-control-next" href="#carouselExampleControls3{{ all.slug }}" role="button"
                                    data-slide="next">
                                     <span aria-hidden="true"><img src="{% static 'img/room/next.png' %}" alt=""></span>
                                     <span class="sr-only">Next</span>
