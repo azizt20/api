@@ -40,7 +40,7 @@ class Dashboard(View):
             data[key] = order
 
             current = (order.start_date + datetime.timedelta(days=1))
-            while current <= order.finish_date:
+            while current <= order.finish_date - datetime.timedelta(days=1):
                 key = "{}_{:%Y-%m-%d}".format(order.room_id, current)
                 skip.add(key)
                 current = (current + datetime.timedelta(days=1))

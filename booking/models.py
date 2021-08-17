@@ -71,7 +71,7 @@ class Order(models.Model):
 
     @property
     def diff_days(self):
-        return int((self.finish_date - self.start_date).days) + 1
+        return int((self.finish_date - self.start_date).days)
 
     def get_absolute_url(self):
         return f'/{self.room.room_type.slug}/{self.room.slug}/{self.slug}'
