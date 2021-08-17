@@ -37,12 +37,10 @@ $(document).ready(function () {
         $('#ahref').attr("href", _ah)
     };
     var today = new Date()
-    var qwqw = ['21-08-25', '21-08-26']
 
     $('#picker').daterangepicker({
-            datesDisabled: ["08-20-2021"],
             isInvalidDate: function (ele) {
-                var currDate = moment(ele._d).format('YY-MM-DD');
+                var currDate = moment(ele._d).format('YYYY-M-DD');
                 return qwqw.indexOf(currDate) != -1;
             },
             minDate: today,

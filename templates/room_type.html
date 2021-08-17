@@ -18,9 +18,6 @@
 
 
     <section class="section1">
-    {% for i in busy %}
-        {{ i }}
-    {% endfor %}
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
@@ -238,13 +235,17 @@
 {% endblock content %}
 
 {% block js %}
+    <script>
+        var qwqw = []
+        {% for i in busy %}
+            qwqw.push('{{ i.year }}-{{ i.month }}-{{i.day}}')
+        {% endfor %}
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="{% static 'js/moment.min.js' %}"></script>
     <script src="{% static 'js/daterangepicker.js' %}"></script>
 
-    <script>
 
-    </script>
 {% endblock %}
 
 
