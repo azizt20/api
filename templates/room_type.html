@@ -240,14 +240,7 @@
     <script src="{% static 'js/daterangepicker.js' %}"></script>
 
     <script>
-        var array = ["2021-08-14", "2021-08-15", "2021-08-16"]
 
-        $('#picker').daterangepicker({
-            beforeShowDay: function (date) {
-                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                return [array.indexOf(string) == -1]
-            }
-        });
     </script>
 {% endblock %}
 

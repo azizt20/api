@@ -16,6 +16,6 @@ def has_group(user, group_name):
 
 
 
-# @register.filter()
-# def datee(value):
-#     return value.format()
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
