@@ -86,39 +86,38 @@ def room(request):
 class RoomTypeView(View):
     def get(self, request, slug):
         room = RoomType.objects.get(slug=slug)
-        rooms = RoomType.objects.all()
+
 
         room_all = RoomType.objects.all()
         datafaziz = {'room': room, 'r_all': room_all}
-        for i in rooms:
-            countORooms = Room.objects.filter(room_type=i)
-            xonalar = Order.objects.filter(room__room_type=i)
-            busydays = []
-            for x in xonalar:
-                sd = x.start_date
-                fd = x.finish_date
-                day = fd - sd
 
-                for single_date in (sd + datetime.timedelta(n) for n in range(int(day.days))):
-                    busydays.append(single_date)
-            sott = sorted(busydays)
-            listbme = []
-            finishlist = []
-            count = 1
-            for inum in sott:
+        countORooms = Room.objects.filter(room_type=room)
+        xonalar = Order.objects.filter(room__room_type=room)
+        busydays = []
+        for x in xonalar:
+            sd = x.start_date
+            fd = x.finish_date
+            day = fd - sd
 
-                if inum in listbme:
-                    count += 1
-                    print(inum)
-                listbme.append(inum)
-                if count == len(countORooms):
-                    finishlist.append(inum)
-                    count = 1
-            print('----------------')
-            print(finishlist)
-            print('----------------')
-            datafaziz[i.type] = finishlist
-            busydays = []
+            for single_date in (sd + datetime.timedelta(n) for n in range(int(day.days))):
+                busydays.append(single_date)
+        sott = sorted(busydays)
+        listbme = []
+        finishlist = []
+        count = 1
+        for inum in sott:
+
+            if inum in listbme:
+                count += 1
+                print(inum)
+            listbme.append(inum)
+            if count == len(countORooms):
+                finishlist.append(inum)
+                count = 1
+        print('----------------')
+        print(finishlist)
+        print('----------------')
+        datafaziz['busy'] = finishlist
 
 
         print(datafaziz)
